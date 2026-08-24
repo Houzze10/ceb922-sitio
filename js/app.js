@@ -40,11 +40,14 @@
     });
   }
 
+  var FECHA_ISO = /^\d{4}-\d{2}-\d{2}$/;
+
   function fechaLarga(iso) {
     if (!iso) return "";
     var p = iso.split("-");
-    if (p.length !== 3) return iso;
-    return parseInt(p[2], 10) + " de " + MESES[parseInt(p[1], 10) - 1] + " de " + p[0];
+    var mes = MESES[parseInt(p[1], 10) - 1];
+    if (p.length !== 3 || !mes) return iso;
+    return parseInt(p[2], 10) + " de " + mes + " de " + p[0];
   }
 
   function hoyISO() {
@@ -54,11 +57,12 @@
     return d.getFullYear() + "-" + m + "-" + dia;
   }
 
-  /* Avisos vigentes: sin vencer, orden fijados-primero y fecha descendente */
+  /* Avisos vigentes: sin vencer, orden fijados-primero y fecha descendente.
+     Un "vence" con formato inválido se ignora (el aviso se queda visible). */
   function avisosVigentes() {
     var hoy = hoyISO();
     var lista = (window.AVISOS || []).filter(function (a) {
-      return a && a.id && a.titulo && (!a.vence || a.vence >= hoy);
+      return a && a.id && a.titulo && (!a.vence || !FECHA_ISO.test(a.vence) || a.vence >= hoy);
     });
     lista.sort(function (a, b) {
       if (!!b.fijado !== !!a.fijado) return b.fijado ? 1 : -1;
@@ -111,7 +115,7 @@
       "<div>" + utilDerecha + "</div>" +
       "</div></div>" +
       '<div class="nav-principal"><div class="contenedor">' +
-      '<a class="marca" href="index.html" aria-label="Ir al inicio">' + ESCUDO +
+      '<a class="marca" href="index.html">' + ESCUDO +
       '<span class="marca-texto"><span class="marca-nombre">' + esc(C.nombreCorto || "CEB 9/22") + "</span>" +
       '<span class="marca-lugar">' + esc(C.ciudad || "") + " · DGB · SEP</span></span></a>" +
       '<button class="nav-hamburguesa" aria-expanded="false" aria-controls="menu-principal" aria-label="Abrir menú">' +
@@ -160,15 +164,15 @@
       "<p>Plantel federal de la " + esc(C.subsistema || "") + ". Educación media superior pública y gratuita en " + esc(C.ciudad || "") + "." +
       (C.cct ? "<br>CCT: " + esc(C.cct) : "") + "</p>" +
       "</div>" +
-      "<div><h3>Contacto</h3><ul>" + contacto + "</ul></div>" +
-      "<div><h3>Accesos rápidos</h3><ul>" +
+      "<div><h2>Contacto</h2><ul>" + contacto + "</ul></div>" +
+      "<div><h2>Accesos rápidos</h2><ul>" +
       '<li><a href="inscripciones.html">Inscripciones</a></li>' +
       '<li><a href="avisos.html">Avisos y comunicados</a></li>' +
       '<li><a href="estatus.html">¿Hay clases hoy?</a></li>' +
       '<li><a href="comunidad.html">Estudiantes y familias</a></li>' +
       '<li><a href="oferta.html">Oferta educativa</a></li>' +
       "</ul></div>" +
-      "<div><h3>Canales oficiales</h3>" +
+      "<div><h2>Canales oficiales</h2>" +
       "<p>La información oficial del plantel es únicamente la publicada en este sitio" +
       (C.facebook ? ' y en nuestra <a href="' + esc(C.facebook) + '" target="_blank" rel="noopener">página de Facebook</a>' : "") +
       ".</p><ul>" +
@@ -226,12 +230,20 @@
     var todos;
     try { todos = avisosVigentes(); } catch (e) { todos = []; }
 
+    /* Texto buscable por aviso, con el HTML del cuerpo despojado (una sola vez) */
+    var despojador = document.createElement("div");
+    todos.forEach(function (a) {
+      despojador.innerHTML = a.cuerpo || "";
+      a._texto = (a.titulo + " " + (a.resumen || "") + " " + despojador.textContent).toLowerCase();
+    });
+
     /* poblar el filtro de meses con los meses que existen */
     if (selMes) {
       var meses = {};
       todos.forEach(function (a) {
         var clave = (a.fecha || "").slice(0, 7);
-        if (clave) meses[clave] = MESES[parseInt(clave.slice(5), 10) - 1] + " " + clave.slice(0, 4);
+        var nombreMes = MESES[parseInt(clave.slice(5), 10) - 1];
+        if (clave && nombreMes) meses[clave] = nombreMes + " " + clave.slice(0, 4);
       });
       Object.keys(meses).sort().reverse().forEach(function (clave) {
         var op = document.createElement("option");
@@ -248,10 +260,7 @@
       var lista = todos.filter(function (a) {
         if (cat && a.tipo !== cat) return false;
         if (mes && (a.fecha || "").slice(0, 7) !== mes) return false;
-        if (q) {
-          var texto = (a.titulo + " " + (a.resumen || "") + " " + (a.cuerpo || "")).toLowerCase();
-          if (texto.indexOf(q) === -1) return false;
-        }
+        if (q && (a._texto || "").indexOf(q) === -1) return false;
         return true;
       });
       caja.innerHTML = lista.length
@@ -270,11 +279,11 @@
     if (!caja) return;
 
     var id = new URLSearchParams(location.search).get("id");
-    var aviso = (window.AVISOS || []).filter(function (a) { return a.id === id; })[0];
+    var aviso = (window.AVISOS || []).filter(function (a) { return a && a.id === id; })[0];
 
     if (!aviso) {
       caja.innerHTML =
-        '<div class="aviso-cuerpo centrado"><h2>Aviso no encontrado</h2>' +
+        '<div class="aviso-cuerpo centrado"><h1>Aviso no encontrado</h1>' +
         '<p>Es posible que el enlace esté incompleto o que el aviso ya no esté disponible.</p>' +
         '<a class="btn btn-guinda" href="avisos.html">Ver todos los avisos</a></div>';
       return;
@@ -333,7 +342,7 @@
       '<h2 style="color:' + e.color + '">' + esc(ESTATUS.estado === "normal" ? "Clases con normalidad" : e.titulo) + "</h2>" +
       (ESTATUS.estado !== "normal" && ESTATUS.mensaje ? "<p>" + esc(ESTATUS.mensaje) + "</p>" : "") +
       (ESTATUS.estado === "normal" ? "<p>El plantel opera hoy en su horario habitual del turno " + esc((C.turno || "vespertino").toLowerCase()) + ".</p>" : "") +
-      '<p class="estatus-hora">Última actualización: ' + esc(ESTATUS.actualizado || "") + " h</p>" +
+      (ESTATUS.actualizado ? '<p class="estatus-hora">Última actualización: ' + esc(ESTATUS.actualizado) + " h</p>" : "") +
       "</div>";
   }
 
