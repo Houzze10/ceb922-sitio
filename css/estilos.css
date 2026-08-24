@@ -602,6 +602,22 @@ html.js .rev.visto { opacity: 1; transform: none; }
 }
 .atajos a:hover { border-color: var(--turquesa); background: var(--turquesa-100); }
 
+/* ---------- Mapa curricular (oferta) ---------- */
+.mapa-curricular .tarjeta h3 {
+  color: var(--turquesa-700); font-size: 1.05rem; letter-spacing: 0.04em;
+  border-bottom: 2px solid var(--turquesa-100); padding-bottom: 8px; margin-bottom: 12px;
+}
+.mapa-curricular ul { list-style: none; margin: 0; padding: 0; }
+.mapa-curricular li {
+  font-size: 0.9rem; color: var(--tinta); padding: 5px 0 5px 16px; position: relative; margin: 0;
+}
+.mapa-curricular li::before {
+  content: ""; position: absolute; left: 0; top: 12px;
+  width: 7px; height: 7px; border-radius: 50%; background: var(--turquesa);
+}
+.mapa-curricular li.mc-extra { color: var(--turquesa-700); font-weight: 600; margin-top: 6px; }
+.mapa-curricular li.mc-extra::before { background: var(--azul-800); }
+
 /* ---------- Cita de bienvenida ---------- */
 .cita {
   position: relative;
