@@ -75,6 +75,7 @@
     var pagina = document.body.getAttribute("data-pagina") || "";
     var enlaces = [
       { url: "index.html", texto: "Inicio", id: "inicio" },
+      { url: "calendario.html", texto: "Calendario de actividades", id: "calendario" },
       {
         url: "inscripciones.html", texto: "Aspirantes", id: "inscripciones",
         hijos: [
@@ -87,7 +88,6 @@
       {
         url: "comunidad.html", texto: "Estudiantes y familias", id: "comunidad",
         hijos: [
-          { url: "calendario.html", texto: "Calendario de actividades" },
           { url: "comunidad.html#horarios", texto: "Horarios de grupo" },
           { url: C.appAsistencia || "comunidad.html#asistencia", texto: "Pase de asistencia", externo: !!C.appAsistencia },
           { url: "comunidad.html#tramites", texto: "Trámites" },
@@ -100,7 +100,7 @@
     ];
 
     /* páginas hijas que iluminan a su padre en el menú */
-    var PADRES = { calendario: "comunidad", oferta: "inscripciones", conocenos: "inscripciones", estatus: "comunidad" };
+    var PADRES = { oferta: "inscripciones", conocenos: "inscripciones", estatus: "comunidad" };
 
     var franja = "";
     if (ESTATUS.estado === "aviso" || ESTATUS.estado === "emergencia") {
@@ -136,7 +136,7 @@
       '<div class="nav-principal"><div class="contenedor">' +
       '<a class="marca" href="index.html">' + ESCUDO +
       '<span class="marca-texto"><span class="marca-nombre">' + esc(C.nombreCorto || "CEB 9/22") + "</span>" +
-      '<span class="marca-lugar">' + esc(C.eponimo ? "«" + C.eponimo + "»" : (C.ciudad || "") + " · DGB · SEP") + "</span></span></a>" +
+      '<span class="marca-lugar">' + esc((C.ciudad || "") + " · DGB · SEP") + "</span></span></a>" +
       '<button class="nav-hamburguesa" aria-expanded="false" aria-controls="menu-principal" aria-label="Abrir menú">' +
       '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>' +
       "</button>" +
@@ -157,7 +157,7 @@
       }).join("") +
       '<li class="nav-cta-movil"><a href="inscripciones.html">Inscripciones ' + esc(C.ciclo || "") + "</a></li>" +
       "</ul>" +
-      '<div class="nav-cta"><a class="btn btn-acento" href="inscripciones.html">Inscripciones</a></div>' +
+      '<div class="nav-cta"><a class="btn btn-acento" href="inscripciones.html">Inscríbete</a></div>' +
       "</div></div>";
 
     sitio.innerHTML = html;
