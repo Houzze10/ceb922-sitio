@@ -3,6 +3,8 @@
 Sitio web del **Centro de Estudios de Bachillerato 9/22** (DGB · SEP), Mazatlán, Sinaloa.
 HTML/CSS/JS puro, sin compiladores ni dependencias — publicado con GitHub Pages.
 
+**🌐 En vivo:** https://houzze10.github.io/ceb922-sitio/
+
 ## Cómo se administra (sin entrar a GitHub)
 
 Todo el contenido variable vive en `datos/`:
