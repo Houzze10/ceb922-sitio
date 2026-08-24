@@ -117,6 +117,7 @@
       '<a href="estatus.html">¿Hay clases hoy?</a>' +
       '<a href="comunidad.html#calendario">Calendario escolar</a>' +
       (C.facebook ? '<a href="' + esc(C.facebook) + '" target="_blank" rel="noopener">Facebook</a>' : "") +
+      (C.instagram ? '<a href="' + esc(C.instagram) + '" target="_blank" rel="noopener">Instagram</a>' : "") +
       "</nav>" +
       "<div>" + utilDerecha + "</div>" +
       "</div></div>" +

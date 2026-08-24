@@ -23,7 +23,7 @@ window.CONFIG = {
   telefono: "669 172 2341",
   whatsapp: "",               // PENDIENTE — solo dígitos con lada, ej. "5216691722341"
   correo: "direccion922@dgb.edu.mx",
-  facebook: "",               // PENDIENTE — URL de la página oficial (el plantel tiene FB e Instagram, faltan los enlaces)
-  instagram: "",              // PENDIENTE — URL del perfil oficial
+  facebook: "https://www.facebook.com/profile.php?id=61588295243244",
+  instagram: "https://www.instagram.com/cebmazatlan922/",
   cct: "",                    // PENDIENTE — Clave de Centro de Trabajo
 };
