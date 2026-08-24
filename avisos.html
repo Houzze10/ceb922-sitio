@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Avisos y comunicados · CEB 9/22 Mazatlán</title>
+  <meta name="description" content="Avisos y comunicados oficiales del CEB 9/22 de Mazatlán: inscripciones, becas, calendario, eventos y comunicación de la Dirección.">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body data-pagina="avisos">
+  <div id="encabezado"></div>
+
+  <main id="contenido">
+    <section class="hero hero--interior">
+      <div class="contenedor">
+        <span class="kicker" style="color:#d9b98a">Comunicación oficial</span>
+        <h1>Avisos y comunicados</h1>
+        <p class="hero-sub">Todo lo que el plantel publica, con fecha y por escrito. Lo que no está aquí, no es oficial.</p>
+      </div>
+      <svg class="ola" viewBox="0 0 1440 56" preserveAspectRatio="none" aria-hidden="true"><path d="M0,32 C240,64 480,0 720,16 C960,32 1200,56 1440,24 L1440,56 L0,56 Z"/></svg>
+    </section>
+
+    <section class="seccion seccion--apretada">
+      <div class="contenedor">
+        <div class="filtros">
+          <div class="filtro-campo">
+            <label for="filtro-categoria">Categoría</label>
+            <select id="filtro-categoria">
+              <option value="">Todas</option>
+              <option value="inscripciones">Inscripciones</option>
+              <option value="becas">Becas</option>
+              <option value="academico">Académico</option>
+              <option value="eventos">Eventos</option>
+              <option value="urgente">Urgente</option>
+              <option value="comunidad">Comunidad</option>
+            </select>
+          </div>
+          <div class="filtro-campo">
+            <label for="filtro-mes">Mes</label>
+            <select id="filtro-mes">
+              <option value="">Todos</option>
+            </select>
+          </div>
+          <div class="filtro-campo" style="flex-grow:2">
+            <label for="filtro-busqueda">Buscar</label>
+            <input type="search" id="filtro-busqueda" placeholder="Ej. inscripciones, beca, examen…">
+          </div>
+        </div>
+
+        <div class="rejilla rejilla-2" id="lista-avisos"></div>
+
+        <div class="nota mt-6">
+          <p>¿Buscas saber si <strong>hoy hay clases</strong>? Esa información vive en su propia página, siempre actualizada: <a href="estatus.html">¿Hay clases hoy?</a></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="pie"></div>
+
+  <script src="datos/config.js"></script>
+  <script src="datos/estatus.js"></script>
+  <script src="datos/avisos.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

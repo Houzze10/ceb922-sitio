@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>¿Hay clases hoy? · CEB 9/22 Mazatlán</title>
+  <meta name="description" content="Estado oficial del día en el CEB 9/22 de Mazatlán: clases con normalidad, avisos o suspensión. Esta es la página oficial que el plantel actualiza ante cualquier contingencia.">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body data-pagina="estatus">
+  <div id="encabezado"></div>
+
+  <main id="contenido">
+    <section class="hero hero--interior">
+      <div class="contenedor">
+        <span class="kicker" style="color:#d9b98a">Estado del plantel</span>
+        <h1>¿Hay clases hoy?</h1>
+        <p class="hero-sub">Esta es la página oficial donde el plantel publica el estado del día. Guárdala en tu teléfono.</p>
+      </div>
+      <svg class="ola" viewBox="0 0 1440 56" preserveAspectRatio="none" aria-hidden="true"><path d="M0,32 C240,64 480,0 720,16 C960,32 1200,56 1440,24 L1440,56 L0,56 Z"/></svg>
+    </section>
+
+    <section class="seccion seccion--apretada">
+      <div class="contenedor" style="max-width:760px">
+        <div id="estatus-hoy"></div>
+
+        <div class="mt-6">
+          <h2>¿Cómo funciona esta página?</h2>
+          <p>Ante mal tiempo, contingencias o cualquier situación que afecte las clases, la Dirección actualiza esta página <strong>antes que cualquier otro canal</strong>. Siempre muestra un estado, aunque todo esté en orden:</p>
+          <div class="info-lista mt-3">
+            <div class="info-item">
+              <strong>✅ Clases con normalidad</strong>
+              <p>El plantel opera en su horario habitual. Es el estado normal de todos los días.</p>
+            </div>
+            <div class="info-item">
+              <strong>ℹ️ Aviso</strong>
+              <p>Hay algo que debes saber hoy (cambio de horario, actividad especial), pero hay clases.</p>
+            </div>
+            <div class="info-item">
+              <strong>⚠️ Suspensión o emergencia</strong>
+              <p>Las clases se suspenden o hay indicaciones urgentes. El detalle aparece arriba y en todas las páginas del sitio.</p>
+            </div>
+          </div>
+          <div class="nota">
+            <p>Si en redes o grupos circula una versión distinta a lo que dice esta página, <strong>lo que vale es lo publicado aquí</strong>.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="pie"></div>
+
+  <script src="datos/config.js"></script>
+  <script src="datos/estatus.js"></script>
+  <script src="datos/avisos.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
