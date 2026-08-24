@@ -365,6 +365,7 @@ html.js .rev.visto { opacity: 1; transform: none; }
   background: rgba(13, 19, 48, 0.92);
   display: flex; align-items: center; justify-content: center; padding: var(--e3);
 }
+.visor[hidden] { display: none !important; }
 .visor figure { margin: 0; max-width: min(1100px, 100%); max-height: 100%; text-align: center; }
 .visor img { max-width: 100%; max-height: 82vh; border-radius: 12px; box-shadow: 0 24px 60px rgba(0,0,0,0.5); }
 .visor figcaption { color: #cfe0ea; margin-top: 12px; font-size: 0.95rem; }
