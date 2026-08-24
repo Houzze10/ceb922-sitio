@@ -43,7 +43,7 @@ window.EVENTOS = [
     fotos: [
       { src: "img/ev-circulo.webp", alt: "Círculo de estudiantes en el patio del plantel visto desde el aire con luz de atardecer", pie: "El círculo de paz, desde el aire" },
       { src: "img/ev-mural.webp", alt: "Mural colorido de Entornos Seguros con mensajes de paz, respeto, igualdad e inclusión", pie: "El mural terminado" },
-      { src: "img/ev-mural-pintando.webp", alt: "Estudiantes pintando el mural colaborativo de Entornos Seguros", pie: "Así empezó: a puro pincel" },
+      { src: "img/ev-mural-pintando.webp", alt: "Estudiantes pintando el mural colaborativo de Entornos Seguros", pie: "Así empezó: pincel en mano" },
       { src: "img/ev-abc-equipo.webp", alt: "Equipo de estudiantes dibujando en cartulina durante la actividad ABC de las emociones", pie: "ABC de las emociones, en equipo" },
     ],
   },
@@ -54,7 +54,7 @@ window.EVENTOS = [
     fotos: [
       { src: "img/ev-25n-marco.webp", alt: "El director y tres estudiantes con el marco morado del 25 de noviembre contra la violencia hacia las mujeres", pie: "25N: nos tomamos la foto y la palabra" },
       { src: "img/ev-8m-huellas.webp", alt: "Alumnas estampando sus huellas con pintura sobre cartulina morada por el 8 de marzo", pie: "Huellas del 8 de marzo" },
-      { src: "img/ev-25n-lienzo.webp", alt: "Lienzo con una huella de mano morada y la leyenda No más violencia contra las mujeres", pie: "El mensaje, clarito" },
+      { src: "img/ev-25n-lienzo.webp", alt: "Lienzo con una huella de mano morada y la leyenda No más violencia contra las mujeres", pie: "El mensaje, claro" },
     ],
   },
   {

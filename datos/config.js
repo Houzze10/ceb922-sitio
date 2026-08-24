@@ -27,5 +27,5 @@ window.CONFIG = {
   instagram: "https://www.instagram.com/cebmazatlan922/",
   cct: "25DBP0001D",
   appInscripcion: "https://inscripcionceb922.netlify.app",
-  appAsistencia: "https://asistencia-ceb922.netlify.app",
+  appAsistencia: "https://ceb922-control-asistencia.netlify.app",
 };

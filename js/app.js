@@ -79,17 +79,17 @@
       {
         url: "inscripciones.html", texto: "Aspirantes", id: "inscripciones",
         hijos: [
-          { url: "inscripciones.html", texto: "Cómo inscribirte" },
-          { url: "beca.html", texto: "Beca Benito Juárez" },
-          { url: "oferta.html", texto: "Qué vas a estudiar" },
           { url: "conocenos.html", texto: "Conoce el plantel" },
+          { url: "oferta.html", texto: "Oferta educativa" },
+          { url: "beca.html", texto: "Beca Benito Juárez" },
+          { url: "inscripciones.html", texto: "Cómo inscribirte" },
         ],
       },
       {
         url: "comunidad.html", texto: "Estudiantes y familias", id: "comunidad",
         hijos: [
           { url: "comunidad.html#horarios", texto: "Horarios de grupo" },
-          { url: C.appAsistencia || "comunidad.html#asistencia", texto: "Pase de asistencia", externo: !!C.appAsistencia },
+          { url: C.appAsistencia || "comunidad.html#asistencia", texto: "Pase de asistencia ↗", externo: !!C.appAsistencia },
           { url: "comunidad.html#tramites", texto: "Trámites" },
           { url: "estatus.html", texto: "¿Hay clases hoy?" },
         ],
@@ -115,8 +115,9 @@
         "</div>";
     }
 
+    var ICONO_TEL = '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8 10a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.7 2Z"/></svg>';
     var utilDerecha = C.telefono
-      ? '<a href="tel:+52' + esc(String(C.telefono).replace(/\D/g, "")) + '">📞 ' + esc(C.telefono) + "</a>"
+      ? '<a href="tel:+52' + esc(String(C.telefono).replace(/\D/g, "")) + '">' + ICONO_TEL + " " + esc(C.telefono) + "</a>"
       : "<span>" + esc(C.subsistema || "") + "</span>";
 
     var html =
@@ -125,11 +126,7 @@
       '<div class="barra-util"><div class="contenedor">' +
       '<nav class="util-enlaces" aria-label="Enlaces de acceso rápido">' +
       '<a href="estatus.html">¿Hay clases hoy?</a>' +
-      '<a href="comunidad.html#horarios">Horarios</a>' +
-      '<a href="conocenos.html">Conócenos</a>' +
-      (C.appAsistencia ? '<a href="' + esc(C.appAsistencia) + '" target="_blank" rel="noopener">Asistencia</a>' : "") +
-      (C.facebook ? '<a href="' + esc(C.facebook) + '" target="_blank" rel="noopener">Facebook</a>' : "") +
-      (C.instagram ? '<a href="' + esc(C.instagram) + '" target="_blank" rel="noopener">Instagram</a>' : "") +
+      (C.appAsistencia ? '<a href="' + esc(C.appAsistencia) + '" target="_blank" rel="noopener" aria-label="Pase de asistencia (se abre en pestaña nueva)">Pase de asistencia ↗</a>' : "") +
       "</nav>" +
       "<div>" + utilDerecha + "</div>" +
       "</div></div>" +
@@ -195,23 +192,22 @@
       "<p>Plantel federal de la " + esc(C.subsistema || "") + ". Educación media superior pública y gratuita en " + esc(C.ciudad || "") + "." +
       (C.cct ? "<br>CCT: " + esc(C.cct) : "") + "</p>" +
       "</div>" +
-      "<div><h2>Contacto</h2><ul>" + contacto + "</ul></div>" +
-      "<div><h2>Accesos rápidos</h2><ul>" +
-      '<li><a href="inscripciones.html">Aspirantes: inscríbete</a></li>' +
+      "<div><h2>Aspirantes</h2><ul>" +
+      '<li><a href="conocenos.html">Conoce el plantel</a></li>' +
+      '<li><a href="oferta.html">Oferta educativa</a></li>' +
+      '<li><a href="beca.html">Beca Benito Juárez</a></li>' +
+      '<li><a href="inscripciones.html">Cómo inscribirte</a></li>' +
+      "</ul></div>" +
+      "<div><h2>Estudiantes y familias</h2><ul>" +
       '<li><a href="comunidad.html#horarios">Horarios de grupo</a></li>' +
       '<li><a href="calendario.html">Calendario de actividades</a></li>' +
-      '<li><a href="conocenos.html">Conócenos</a></li>' +
-      (C.appAsistencia ? '<li><a href="' + esc(C.appAsistencia) + '" target="_blank" rel="noopener">Pase de asistencia</a></li>' : "") +
+      (C.appAsistencia ? '<li><a href="' + esc(C.appAsistencia) + '" target="_blank" rel="noopener">Pase de asistencia ↗</a></li>' : "") +
       '<li><a href="estatus.html">¿Hay clases hoy?</a></li>' +
-      '<li><a href="oferta.html">Oferta educativa</a></li>' +
       '<li><a href="avisos.html">Avisos y comunicados</a></li>' +
       "</ul></div>" +
-      "<div><h2>Canales oficiales</h2>" +
-      "<p>La información oficial del plantel es únicamente la publicada en este sitio" +
-      (C.facebook ? ' y en nuestra <a href="' + esc(C.facebook) + '" target="_blank" rel="noopener">página de Facebook</a>' : "") +
-      ".</p><ul>" +
-      (C.facebook ? '<li><a href="' + esc(C.facebook) + '" target="_blank" rel="noopener">Facebook</a></li>' : "") +
-      (C.instagram ? '<li><a href="' + esc(C.instagram) + '" target="_blank" rel="noopener">Instagram</a></li>' : "") +
+      "<div><h2>Contacto</h2><ul>" + contacto +
+      (C.facebook ? '<li><a href="' + esc(C.facebook) + '" target="_blank" rel="noopener">Facebook ↗</a></li>' : "") +
+      (C.instagram ? '<li><a href="' + esc(C.instagram) + '" target="_blank" rel="noopener">Instagram ↗</a></li>' : "") +
       '<li><a href="privacidad.html">Aviso de privacidad</a></li>' +
       "</ul></div>" +
       "</div>" +
@@ -230,7 +226,7 @@
       '<div class="aviso-meta">' +
       '<span class="aviso-cat">' + esc(cat.nombre) + "</span>" +
       '<time class="aviso-fecha" datetime="' + esc(a.fecha) + '">' + fechaLarga(a.fecha) + "</time>" +
-      (a.fijado ? '<span class="aviso-fijado">📌 Fijado</span>' : "") +
+      (a.fijado ? '<span class="aviso-fijado">Fijado</span>' : "") +
       "</div>" +
       '<h3><a href="aviso.html?id=' + encodeURIComponent(a.id) + '">' + esc(a.titulo) + "</a></h3>" +
       '<p class="aviso-resumen">' + esc(a.resumen || "") + "</p>" +
@@ -339,7 +335,7 @@
       (aviso.imagen ? '<p><img src="' + esc(aviso.imagen) + '" alt="' + esc(aviso.imagenAlt || aviso.titulo) + '" style="border-radius:12px;box-shadow:var(--sombra)" loading="lazy"></p>' : "") +
       (aviso.cuerpo || "<p>" + esc(aviso.resumen || "") + "</p>") +
       (aviso.enlace
-        ? '<a class="aviso-adjunto" href="' + esc(aviso.enlace) + '" target="_blank" rel="noopener">📄 ' + esc(aviso.enlaceTexto || "Ver documento adjunto") + "</a>"
+        ? '<a class="aviso-adjunto" href="' + esc(aviso.enlace) + '" target="_blank" rel="noopener">' + esc(aviso.enlaceTexto || "Ver documento adjunto") + "</a>"
         : "") +
       '<div class="aviso-compartir">' +
       '<a class="btn btn-azul" href="https://wa.me/?text=' + textoWa + '" target="_blank" rel="noopener">Compartir por WhatsApp</a>' +
@@ -364,16 +360,21 @@
     var caja = document.getElementById("estatus-hoy");
     if (!caja) return;
 
+    var ICONOS_EST = {
+      normal: '<svg viewBox="0 0 24 24" width="52" height="52" fill="none" stroke="#1e7d4f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m8 12.5 2.5 2.5L16 9"/></svg>',
+      aviso: '<svg viewBox="0 0 24 24" width="52" height="52" fill="none" stroke="#1c5fa8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-5M12 8h.01"/></svg>',
+      emergencia: '<svg viewBox="0 0 24 24" width="52" height="52" fill="none" stroke="#b3261e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/><path d="M12 9v4M12 17h.01"/></svg>',
+    };
     var estilos = {
-      normal:     { color: "#1e7d4f", icono: "✅", titulo: "Clases con normalidad" },
-      aviso:      { color: "#1c5fa8", icono: "ℹ️", titulo: ESTATUS.titulo || "Aviso" },
-      emergencia: { color: "#b3261e", icono: "⚠️", titulo: ESTATUS.titulo || "Atención" },
+      normal:     { color: "#1e7d4f", titulo: "Clases con normalidad" },
+      aviso:      { color: "#1c5fa8", titulo: ESTATUS.titulo || "Aviso" },
+      emergencia: { color: "#b3261e", titulo: ESTATUS.titulo || "Atención" },
     };
     var e = estilos[ESTATUS.estado] || estilos.normal;
 
     caja.innerHTML =
       '<div class="estatus-caja" style="--est-color:' + e.color + '" role="status">' +
-      '<div class="estatus-icono" aria-hidden="true">' + e.icono + "</div>" +
+      '<div class="estatus-icono" aria-hidden="true">' + (ICONOS_EST[ESTATUS.estado] || ICONOS_EST.normal) + "</div>" +
       '<h2 style="color:' + e.color + '">' + esc(ESTATUS.estado === "normal" ? "Clases con normalidad" : e.titulo) + "</h2>" +
       (ESTATUS.estado !== "normal" && ESTATUS.mensaje ? "<p>" + esc(ESTATUS.mensaje) + "</p>" : "") +
       (ESTATUS.estado === "normal" ? "<p>El plantel opera hoy en su horario habitual del turno " + esc((C.turno || "vespertino").toLowerCase()) + ".</p>" : "") +
@@ -472,12 +473,12 @@
     document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !visor.hidden) cerrar(); });
   }
 
-  /* ---------- Horarios de grupo (comunidad.html) ---------- */
-  function pintarHorarios() {
-    var tabs = document.getElementById("horario-tabs");
-    var caja = document.getElementById("horario-tabla");
-    if (!tabs || !caja || !window.HORARIOS) return;
-    var DIAS = ["Hora", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes"];
+  /* ---------- Horarios de grupo y propedéutico (comunidad.html) ---------- */
+  function montarHorario(idTabs, idTabla, datos) {
+    var tabs = document.getElementById(idTabs);
+    var caja = document.getElementById(idTabla);
+    if (!tabs || !caja || !datos) return;
+    var DIAS = datos.dias || ["Hora", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes"];
 
     /* Paleta fija por materia: cada una con su color, bien distinto del resto */
     var COLORES_MATERIA = [
@@ -494,6 +495,9 @@
       { busca: "TURISMO",        fondo: "#dcf3ec", borde: "#0d9373", texto: "#06523f" },
       { busca: "HOSPEDAJE",      fondo: "#f3e9df", borde: "#96622d", texto: "#57351a" },
       { busca: "SOCIOEMOCIONAL", fondo: "#f5edd2", borde: "#a08415", texto: "#5c4a08" },
+      { busca: "TEST",           fondo: "#fbe7cd", borde: "#c47612", texto: "#6d4006" },
+      { busca: "INTEGRACIÓN",    fondo: "#fdf7d5", borde: "#b0a013", texto: "#5f5607" },
+      { busca: "CRÍTICO",        fondo: "#fdeade", borde: "#c26a3a", texto: "#6e3517" },
     ];
 
     function colorMateria(nombre) {
@@ -524,12 +528,11 @@
         html += "</tr>";
       });
       html += "</tbody></table></div>" +
-        '<div class="horario-pie"><span class="texto-suave">' + esc(g.semestre) + " · turno vespertino · " + esc(window.HORARIOS.ciclo) + "</span>" +
-        '<a class="btn btn-contorno" href="' + esc(g.pdf) + '" target="_blank" rel="noopener">📄 Descargar en PDF</a></div>';
+        '<div class="horario-pie"><span class="texto-suave">' + esc(g.semestre) + " · turno vespertino · " + esc(datos.ciclo) + "</span></div>";
       caja.innerHTML = html;
     }
 
-    window.HORARIOS.grupos.forEach(function (g, i) {
+    datos.grupos.forEach(function (g, i) {
       var b = document.createElement("button");
       b.type = "button";
       b.className = "horario-tab" + (i === 0 ? " activo" : "");
@@ -542,7 +545,12 @@
       });
       tabs.appendChild(b);
     });
-    pintarGrupo(window.HORARIOS.grupos[0]);
+    pintarGrupo(datos.grupos[0]);
+  }
+
+  function pintarHorarios() {
+    montarHorario("horario-tabs", "horario-tabla", window.HORARIOS);
+    montarHorario("prope-tabs", "prope-tabla", window.PROPEDEUTICO);
   }
 
   /* ---------- Calendario de actividades (comunidad.html) ---------- */
@@ -558,7 +566,7 @@
       return;
     }
     caja.innerHTML = lista.map(function (c, i) {
-      return '<div class="fecha-tarjeta fecha-tono-' + (i % 6) + '">' +
+      return '<div class="fecha-tarjeta">' +
         "<strong>" + esc(c.evento) + "</strong>" +
         '<span class="fecha-cuando">' + esc(c.fecha) + "</span>" +
         (c.detalle ? "<p>" + esc(c.detalle) + "</p>" : "") +

@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Estudiantes y familias · CEB 9/22 Mazatlán</title>
   <meta name="description" content="Horarios, calendario escolar, trámites de control escolar y canales de comunicación del CEB 9/22 de Mazatlán para estudiantes, madres y padres de familia.">
-  <link rel="icon" type="image/png" href="favicon.png?v=10">
-  <link rel="stylesheet" href="css/estilos.css?v=10">
+  <link rel="icon" type="image/png" href="favicon.png?v=11">
+  <link rel="stylesheet" href="css/estilos.css?v=11">
 </head>
 <body data-pagina="comunidad">
   <div id="encabezado"></div>
@@ -37,10 +37,8 @@
       <div class="contenedor">
         <span class="kicker">Horario y acceso</span>
         <h2>Turno vespertino</h2>
-        <p>Lunes a viernes, de <strong>2:00 a 8:00 de la tarde</strong>, en la Secundaria «Nueva Creación» (Fracc. Santa Teresa). Las familias saben en todo momento dónde y con quién están sus hijos.</p>
-        <div class="nota">
-          <p>Ante mal tiempo o cualquier contingencia, consulta siempre la página <a href="estatus.html"><strong>¿Hay clases hoy?</strong></a> — es el lugar oficial donde el plantel publica el estado del día.</p>
-        </div>
+        <p>Lunes a viernes, de <strong>14:00 a 20:00 h</strong>, en la Secundaria «Nueva Creación» (Fracc. Santa Teresa). Las familias pueden verificar en línea, al momento, la <a href="#asistencia">asistencia de sus hijas e hijos</a>.</p>
+        
       </div>
     </section>
 
@@ -48,11 +46,16 @@
       <div class="contenedor">
         <span class="kicker">Semestre A · 2026-2027</span>
         <h2>Horarios de <em>grupo</em></h2>
-        <p class="intro-seccion">Elige tu grupo y ve tu semana completa, con cada materia en su color. Aquí solo se publican los horarios del alumnado.</p>
+        <p class="intro-seccion">Elige tu grupo y consulta tu semana completa, con cada materia en su color. Aquí solo se publican los horarios del alumnado.</p>
         <div class="horario-tabs mt-4" id="horario-tabs" role="tablist" aria-label="Elegir grupo"></div>
         <div id="horario-tabla"></div>
+
+        <h3 class="mt-6" style="font-size:1.4rem">Curso propedéutico · nuevo ingreso</h3>
+        <p class="intro-seccion">Del 24 al 28 de agosto, de 14:00 a 18:00 h, en jornada continua. Con esta semana arrancan los grupos 101 y 102.</p>
+        <div class="horario-tabs mt-3" id="prope-tabs" role="tablist" aria-label="Elegir grupo del propedéutico"></div>
+        <div id="prope-tabla"></div>
         <div class="nota">
-          <p><strong>Nuevo ingreso (grupos 101 y 102):</strong> antes de arrancar el semestre se cursa el propedéutico EDIEMS, en jornada de 14:00 a 18:00. <a href="docs/propedeutico-ediems-2026-2027.pdf" target="_blank" rel="noopener">Descarga aquí su horario completo (PDF)</a>.</p>
+          <p><strong>Lunes 24:</strong> aplicación del test EDIEMS (concluye 18:30). <strong>Martes 25:</strong> actividades de integración. Las sesiones de Lenguaje inician el miércoles 26.</p>
         </div>
       </div>
     </section>
@@ -61,11 +64,28 @@
       <div class="contenedor">
         <span class="kicker">Para madres y padres</span>
         <h2>Pase de asistencia</h2>
-        <p class="intro-seccion">Consulta desde tu teléfono, al momento, si tu hija o hijo llegó a clases.</p>
-        <div class="hero-acciones mt-3">
-          <a class="btn btn-acento" href="https://asistencia-ceb922.netlify.app" target="_blank" rel="noopener">Abrir Control de Asistencia</a>
+        <p class="intro-seccion">El sistema del plantel para consultar, desde tu teléfono y al momento, si tu hija o hijo llegó a clases.</p>
+        <ol class="pasos mt-4">
+          <li class="paso">
+            <h3>Abre el sistema</h3>
+            <p>Entra a <a href="https://ceb922-control-asistencia.netlify.app" target="_blank" rel="noopener">Control de Asistencia ↗</a> desde cualquier teléfono o computadora.</p>
+          </li>
+          <li class="paso">
+            <h3>Crea tu cuenta</h3>
+            <p>Toca <strong>«Crear cuenta»</strong>, elige <strong>«Padre / Madre de familia»</strong> y llena tus datos: nombre, apellidos, correo, teléfono y una contraseña de al menos 6 caracteres.</p>
+          </li>
+          <li class="paso">
+            <h3>Vincula a tu hija o hijo</h3>
+            <p>La Dirección liga tu cuenta con tu estudiante. Si necesitas ayuda con este paso, en el plantel te acompañamos.</p>
+          </li>
+          <li class="paso">
+            <h3>Consulta cuando quieras</h3>
+            <p>Inicia sesión con tu correo y contraseña y revisa la asistencia del día. Si olvidas tu contraseña, el sistema te la repone con «Olvidé mi contraseña».</p>
+          </li>
+        </ol>
+        <div class="hero-acciones mt-4">
+          <a class="btn btn-acento" href="https://ceb922-control-asistencia.netlify.app" target="_blank" rel="noopener">Abrir Control de Asistencia</a>
         </div>
-        <p class="texto-suave" style="font-size:0.9rem">La primera vez, crea tu cuenta como madre, padre o tutor. En el plantel te ayudamos a activarla.</p>
       </div>
     </section>
 
@@ -73,7 +93,7 @@
       <div class="contenedor">
         <span class="kicker">Control escolar</span>
         <h2>Trámites del plantel</h2>
-        <p class="intro-seccion">Se hacen en la Dirección, de 2:00 a 8:00. Sin costo.</p>
+        <p class="intro-seccion">Se realizan en la Dirección, de 14:00 a 20:00 h. Sin costo.</p>
         <div class="info-lista mt-4">
           <div class="info-item">
             <strong>Constancia de estudios</strong>
@@ -103,7 +123,7 @@
       <div class="contenedor">
         <span class="kicker">Convivencia</span>
         <h2>Una escuela ordenada y segura</h2>
-        <p>Una regla sostiene todo: aquí nos tratamos con respeto. El reglamento se entrega al inscribirte; cualquier situación se atiende directo con la Dirección.</p>
+        <p>Una regla sostiene todo: aquí nos tratamos con respeto. El reglamento se entrega al inscribirte; cualquier situación se atiende directamente con la Dirección.</p>
         <div class="rejilla rejilla-2 mt-4">
           <div class="tarjeta">
             <h3>Canales oficiales</h3>
@@ -122,11 +142,11 @@
 
   <div id="pie"></div>
 
-  <script src="datos/config.js?v=10"></script>
-  <script src="datos/estatus.js?v=10"></script>
-  <script src="datos/avisos.js?v=10"></script>
-  <script src="datos/horarios.js?v=10"></script>
-  <script src="datos/calendario.js?v=10"></script>
-  <script src="js/app.js?v=10"></script>
+  <script src="datos/config.js?v=11"></script>
+  <script src="datos/estatus.js?v=11"></script>
+  <script src="datos/avisos.js?v=11"></script>
+  <script src="datos/horarios.js?v=11"></script>
+  <script src="datos/calendario.js?v=11"></script>
+  <script src="js/app.js?v=11"></script>
 </body>
 </html>
