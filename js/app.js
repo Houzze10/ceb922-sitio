@@ -349,6 +349,41 @@
       "</div>";
   }
 
+  /* ---------- Expediente interactivo (inscripciones.html) ---------- */
+  function pintarExpediente() {
+    var lista = document.getElementById("exp-lista");
+    if (!lista) return;
+    var CLAVE = "ceb922-expediente";
+    var listos;
+    try { listos = JSON.parse(localStorage.getItem(CLAVE)) || []; } catch (e) { listos = []; }
+    var docs = lista.querySelectorAll(".exp-doc");
+    var avance = document.getElementById("exp-avance");
+    var texto = document.getElementById("exp-texto");
+
+    function refrescar() {
+      var n = 0;
+      docs.forEach(function (d) {
+        var listo = listos.indexOf(d.getAttribute("data-doc")) !== -1;
+        d.classList.toggle("listo", listo);
+        d.setAttribute("aria-pressed", listo ? "true" : "false");
+        if (listo) n++;
+      });
+      if (avance) avance.style.width = (n / docs.length) * 100 + "%";
+      if (texto) texto.textContent = n + "/" + docs.length + " listos";
+    }
+
+    docs.forEach(function (d) {
+      d.addEventListener("click", function () {
+        var id = d.getAttribute("data-doc");
+        var i = listos.indexOf(id);
+        if (i === -1) listos.push(id); else listos.splice(i, 1);
+        try { localStorage.setItem(CLAVE, JSON.stringify(listos)); } catch (e) {}
+        refrescar();
+      });
+    });
+    refrescar();
+  }
+
   /* ---------- Vida estudiantil (vida.html) ---------- */
   function pintarVida() {
     var caja = document.getElementById("vida-eventos");
@@ -508,6 +543,7 @@
     try { pintarListaAvisos(); } catch (e) {}
     try { pintarAvisoDetalle(); } catch (e) {}
     try { pintarEstatus(); } catch (e) {}
+    try { pintarExpediente(); } catch (e) {}
     try { pintarVida(); } catch (e) {}
     try { pintarHorarios(); } catch (e) {}
     try { pintarCalendario(); } catch (e) {}

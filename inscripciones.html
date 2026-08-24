@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Inscripciones · CEB 9/22 Mazatlán</title>
   <meta name="description" content="Cómo inscribirte al CEB 9/22 de Mazatlán: pasos, requisitos y Beca Benito Juárez. Bachillerato público federal 100% gratuito.">
-  <link rel="icon" type="image/png" href="favicon.png?v=6">
-  <link rel="stylesheet" href="css/estilos.css?v=6">
+  <link rel="icon" type="image/png" href="favicon.png?v=7">
+  <link rel="stylesheet" href="css/estilos.css?v=7">
 </head>
 <body data-pagina="inscripciones">
   <div id="encabezado"></div>
@@ -55,23 +55,59 @@
         <div class="rejilla rejilla-2">
           <div>
             <span class="kicker">Documentación</span>
-            <h2>Tu expediente, papel por papel</h2>
-            <ul class="lista-check mt-3">
-              <li><strong>Constancia de estudios o certificado de secundaria</strong> — original y copia; el original dentro de un protector de hojas.</li>
-              <li><strong>Acta de nacimiento</strong> — original y copia (las actas del extranjero, apostilladas); el original en protector de hojas.</li>
-              <li><strong>CURP</strong> — copia en amplificación a tamaño carta.</li>
-              <li><strong>Número de Seguridad Social</strong> (IMSS o ISSSTE) — solo si ya cuentas con él.</li>
-              <li><strong>Certificado médico</strong> — expedido por institución pública (SSA, ISESALUD, IMSS, ISSSTE o Cruz Roja).</li>
-              <li><strong>Comprobante de domicilio</strong> — reciente, no mayor a tres meses.</li>
-              <li><strong>4 fotografías tamaño infantil</strong> — de frente, en blanco y negro, papel mate, con tu nombre al reverso, en una bolsita o sobre.</li>
-            </ul>
-            <div class="nota">
-              <p><strong>La solicitud de inscripción y las cartas de consentimiento no las busques ni las imprimas:</strong> te las damos en el plantel para firmarlas ahí mismo.</p>
+            <h2>Tu expediente</h2>
+            <div class="exp-progreso">
+              <div class="exp-barra"><div class="exp-avance" id="exp-avance"></div></div>
+              <strong id="exp-texto">0/7 listos</strong>
             </div>
-            <div class="tarjeta mt-3">
-              <h3>📲 Tu checklist en el teléfono</h3>
-              <p>Abre la lista interactiva, marca cada documento conforme lo juntes y llega al plantel con todo listo. Tu avance se guarda en tu propio teléfono.</p>
-              <a class="btn btn-acento" href="https://inscripcionceb922.netlify.app" target="_blank" rel="noopener">Abrir el checklist interactivo</a>
+            <p class="texto-suave" style="font-size:0.9rem">Toca cada documento conforme lo tengas. Tu avance se guarda solo en este teléfono.</p>
+            <ol class="exp-lista" id="exp-lista">
+              <li><button type="button" class="exp-doc" data-doc="certificado" aria-pressed="false">
+                <span class="exp-num">01</span>
+                <span class="exp-cuerpo"><strong>Constancia o certificado de secundaria</strong>
+                  <span class="exp-chips"><span>Original y copia</span><span>Original en protector</span></span></span>
+                <span class="exp-check" aria-hidden="true"></span>
+              </button></li>
+              <li><button type="button" class="exp-doc" data-doc="acta" aria-pressed="false">
+                <span class="exp-num">02</span>
+                <span class="exp-cuerpo"><strong>Acta de nacimiento</strong>
+                  <span class="exp-chips"><span>Original y copia</span><span>Del extranjero: apostillada</span></span></span>
+                <span class="exp-check" aria-hidden="true"></span>
+              </button></li>
+              <li><button type="button" class="exp-doc" data-doc="curp" aria-pressed="false">
+                <span class="exp-num">03</span>
+                <span class="exp-cuerpo"><strong>CURP</strong>
+                  <span class="exp-chips"><span>Copia ampliada a tamaño carta</span></span></span>
+                <span class="exp-check" aria-hidden="true"></span>
+              </button></li>
+              <li><button type="button" class="exp-doc" data-doc="nss" aria-pressed="false">
+                <span class="exp-num">04</span>
+                <span class="exp-cuerpo"><strong>Número de Seguridad Social (IMSS/ISSSTE)</strong>
+                  <span class="exp-chips"><span>Solo si aplica</span></span></span>
+                <span class="exp-check" aria-hidden="true"></span>
+              </button></li>
+              <li><button type="button" class="exp-doc" data-doc="medico" aria-pressed="false">
+                <span class="exp-num">05</span>
+                <span class="exp-cuerpo"><strong>Certificado médico</strong>
+                  <span class="exp-chips"><span>Institución pública</span></span></span>
+                <span class="exp-check" aria-hidden="true"></span>
+              </button></li>
+              <li><button type="button" class="exp-doc" data-doc="domicilio" aria-pressed="false">
+                <span class="exp-num">06</span>
+                <span class="exp-cuerpo"><strong>Comprobante de domicilio</strong>
+                  <span class="exp-chips"><span>Máx. 3 meses</span></span></span>
+                <span class="exp-check" aria-hidden="true"></span>
+              </button></li>
+              <li><button type="button" class="exp-doc" data-doc="fotos" aria-pressed="false">
+                <span class="exp-num">07</span>
+                <span class="exp-cuerpo"><strong>4 fotografías tamaño infantil</strong>
+                  <span class="exp-chips"><span>B/N · papel mate</span><span>Nombre al reverso</span></span></span>
+                <span class="exp-check" aria-hidden="true"></span>
+              </button></li>
+            </ol>
+            <div class="exp-plantel mt-3">
+              <strong>No los busques ni los imprimas</strong>
+              <p>La solicitud de inscripción y las cartas de consentimiento y de datos <strong>te las damos en el plantel</strong>, para firmarlas ahí mismo.</p>
             </div>
           </div>
           <div id="beca">
@@ -98,9 +134,9 @@
 
   <div id="pie"></div>
 
-  <script src="datos/config.js?v=6"></script>
-  <script src="datos/estatus.js?v=6"></script>
-  <script src="datos/avisos.js?v=6"></script>
-  <script src="js/app.js?v=6"></script>
+  <script src="datos/config.js?v=7"></script>
+  <script src="datos/estatus.js?v=7"></script>
+  <script src="datos/avisos.js?v=7"></script>
+  <script src="js/app.js?v=7"></script>
 </body>
 </html>
