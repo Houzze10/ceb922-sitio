@@ -15,7 +15,7 @@ window.CONFIG = {
   // Ubicación y horario
   sede: "Instalaciones de la Secundaria «Nueva Creación»",
   direccion: "Calle Santa Liduvina S/N, entre Av. de los Reyes y Calle Santa Aurora, Fracc. Santa Teresa, C.P. 82090, Mazatlán, Sinaloa",
-  mapsUrl: "https://www.google.com/maps/search/?api=1&query=Calle+Santa+Liduvina+Santa+Teresa+Mazatl%C3%A1n",
+  mapsUrl: "https://www.google.com/maps/search/?api=1&query=Secundaria+Nueva+Creaci%C3%B3n+Santa+Teresa+Mazatl%C3%A1n",
   turno: "Vespertino",
   horarioAtencion: "Lunes a viernes, 14:00 a 20:00 h",
 
@@ -27,4 +27,5 @@ window.CONFIG = {
   instagram: "https://www.instagram.com/cebmazatlan922/",
   cct: "25DBP0001D",
   appInscripcion: "https://inscripcionceb922.netlify.app",
+  appAsistencia: "https://asistencia-ceb922.netlify.app",
 };

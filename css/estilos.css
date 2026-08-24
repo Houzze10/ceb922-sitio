@@ -301,11 +301,14 @@ html.js .rev.visto { opacity: 1; transform: none; }
   .faro-mar-2 { animation: faro-mar 9s ease-in-out infinite reverse; }
   .faro-mar-3 { animation: faro-mar 6s ease-in-out infinite; }
 
-  /* Las fotos-menú: suben desde el mar, alrededor del faro */
+  /* Las fotos-menú: giran en espiral ALREDEDOR del faro mientras suben,
+     pasando por delante y por detrás de la torre */
+  .faro-3d { z-index: 2; }
   .foto-flotante {
-    position: absolute; bottom: -20px; width: 84px; text-decoration: none;
-    text-align: center; z-index: 3; will-change: transform, opacity; opacity: 0;
-    animation: ff-subir linear infinite;
+    position: absolute; bottom: 4px; left: 50%; width: 88px; margin-left: -44px;
+    text-decoration: none; text-align: center; will-change: transform, opacity;
+    opacity: 0; z-index: 4;
+    animation: ff-helice 16s linear infinite;
   }
   .foto-flotante img {
     width: 76px; height: 76px; border-radius: 50%; object-fit: cover;
@@ -321,19 +324,43 @@ html.js .rev.visto { opacity: 1; transform: none; }
   .foto-flotante:hover, .foto-flotante:focus-visible { animation-play-state: paused; z-index: 6; }
   .foto-flotante:hover img, .foto-flotante:focus-visible img { transform: scale(1.16); border-color: #fff; }
 
-  .ff-1 { left: -4%;  animation-duration: 12s;   animation-delay: -1s; }
-  .ff-2 { left: 14%;  animation-duration: 14.5s; animation-delay: -6s; }
-  .ff-3 { left: 2%;   animation-duration: 13s;   animation-delay: -10s; }
-  .ff-4 { right: 12%; animation-duration: 15.5s; animation-delay: -3.5s; }
-  .ff-5 { right: -4%; animation-duration: 12.5s; animation-delay: -8s; }
-  .ff-6 { right: 3%;  animation-duration: 14s;   animation-delay: -12s; }
+  .ff-1 { animation-delay: 0s; }
+  .ff-2 { animation-delay: -4s; }
+  .ff-3 { animation-delay: -8s; }
+  .ff-4 { animation-delay: -12s; }
 }
-@keyframes ff-subir {
-  0%   { transform: translateY(0) scale(0.7); opacity: 0; }
-  10%  { opacity: 1; }
-  80%  { opacity: 1; }
-  100% { transform: translateY(-470px) scale(1.04); opacity: 0; }
+/* Hélice: una vuelta completa alrededor de la torre mientras sube.
+   Mitad trasera: más pequeña, más tenue y DETRÁS del faro (z-index). */
+@keyframes ff-helice {
+  0%    { transform: translate(0, 0) scale(1);          opacity: 0;    z-index: 4; }
+  6%    { opacity: 1; }
+  12.5% { transform: translate(115px, -55px) scale(0.95);  opacity: 1;    z-index: 4; }
+  25%   { transform: translate(160px, -110px) scale(0.85); opacity: 0.95; z-index: 4; }
+  37.5% { transform: translate(115px, -165px) scale(0.74); opacity: 0.65; z-index: 1; }
+  50%   { transform: translate(0, -220px) scale(0.66);     opacity: 0.5;  z-index: 1; }
+  62.5% { transform: translate(-115px, -275px) scale(0.74); opacity: 0.65; z-index: 1; }
+  75%   { transform: translate(-160px, -330px) scale(0.85); opacity: 0.95; z-index: 4; }
+  87.5% { transform: translate(-115px, -385px) scale(0.95); opacity: 1;   z-index: 4; }
+  94%   { opacity: 1; }
+  100%  { transform: translate(0, -440px) scale(1);        opacity: 0;    z-index: 4; }
 }
+
+/* Mini-pasos compactos (aspirantes) */
+.mini-pasos { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--e2); grid-template-columns: 1fr; }
+@media (min-width: 700px) { .mini-pasos { grid-template-columns: repeat(3, 1fr); } }
+.mini-pasos li {
+  display: grid; grid-template-columns: auto 1fr; column-gap: 14px; align-items: center;
+  background: var(--blanco); border-radius: 14px; box-shadow: var(--sombra);
+  padding: 14px 18px; border-left: 5px solid var(--turquesa);
+}
+.mini-pasos span {
+  grid-row: 1 / 3; width: 42px; height: 42px; border-radius: 50%;
+  background: var(--azul-800); color: var(--turquesa-claro);
+  font-family: var(--f-display); font-weight: 700; font-size: 1.2rem;
+  display: flex; align-items: center; justify-content: center;
+}
+.mini-pasos strong { color: var(--azul-800); line-height: 1.2; }
+.mini-pasos small { color: var(--tinta-suave); font-size: 0.82rem; }
 @keyframes faro-foco {
   0%, 100% { opacity: 0.55; }
   50% { opacity: 1; }
@@ -356,12 +383,10 @@ html.js .rev.visto { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) {
   .faro-foco, .faro-halo, .faro-haz, .faro-estrella, .faro-mar { animation: none; }
   .foto-flotante { animation: none; opacity: 1; }
-  .ff-1 { transform: translateY(-90px); }
-  .ff-2 { transform: translateY(-330px); }
-  .ff-3 { transform: translateY(-210px); }
-  .ff-4 { transform: translateY(-280px); }
-  .ff-5 { transform: translateY(-150px); }
-  .ff-6 { transform: translateY(-400px); }
+  .ff-1 { transform: translate(150px, -110px); }
+  .ff-2 { transform: translate(-150px, -180px); }
+  .ff-3 { transform: translate(150px, -300px); }
+  .ff-4 { transform: translate(-150px, -390px); }
 }
 
 /* ---------- Galería de vida escolar ---------- */
@@ -507,6 +532,45 @@ html.js .rev.visto { opacity: 1; transform: none; }
 .tarjeta-enlace { font-weight: 600; text-decoration: none; }
 .tarjeta-enlace::after { content: " →"; }
 .tarjeta-enlace:hover { text-decoration: underline; }
+
+/* ---------- Puertas por audiencia (portada) ---------- */
+.puerta {
+  background: var(--blanco); border-radius: var(--radio); box-shadow: var(--sombra);
+  padding: var(--e4); border-top: 6px solid var(--pu-color, var(--turquesa));
+  display: flex; flex-direction: column; gap: 10px;
+}
+.puerta--aspirante { --pu-color: var(--turquesa); }
+.puerta--comunidad { --pu-color: var(--azul-800); }
+.puerta-etiqueta {
+  align-self: flex-start; font-size: 0.74rem; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  background: color-mix(in srgb, var(--pu-color) 14%, white); color: var(--azul-900);
+  border-radius: 999px; padding: 4px 14px;
+}
+.puerta h3 { font-size: 1.5rem; margin: 0; }
+.puerta > p { color: var(--tinta-suave); margin: 0; }
+.puerta-lista { list-style: none; margin: 6px 0 var(--e2); padding: 0; }
+.puerta-lista li { margin: 0; border-bottom: 1px solid var(--linea); }
+.puerta-lista li:last-child { border-bottom: 0; }
+.puerta-lista a {
+  display: block; padding: 11px 4px 11px 26px; position: relative;
+  text-decoration: none; font-weight: 600; color: var(--azul-800);
+}
+.puerta-lista a::before { content: "→"; position: absolute; left: 2px; color: var(--pu-color); transition: transform 0.15s ease; }
+.puerta-lista a:hover { color: var(--turquesa-700); }
+.puerta-lista a:hover::before { transform: translateX(4px); }
+.puerta .btn { align-self: flex-start; margin-top: auto; }
+
+/* ---------- Atajos del portal (comunidad) ---------- */
+.atajos { display: flex; gap: 10px; flex-wrap: wrap; }
+.atajos a {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--blanco); border: 2px solid var(--linea); border-radius: 999px;
+  padding: 10px 18px; text-decoration: none; font-weight: 600; color: var(--azul-800);
+  min-height: 46px; font-size: 0.95rem;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.atajos a:hover { border-color: var(--turquesa); background: var(--turquesa-100); }
 
 /* ---------- Cita de bienvenida ---------- */
 .cita {

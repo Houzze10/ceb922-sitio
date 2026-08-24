@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Contacto · CEB 9/22 Mazatlán</title>
   <meta name="description" content="Ubicación, horario de atención y medios de contacto del CEB 9/22 de Mazatlán, Sinaloa (colonia Santa Teresa, turno vespertino).">
-  <link rel="icon" type="image/png" href="favicon.png?v=7">
-  <link rel="stylesheet" href="css/estilos.css?v=7">
+  <link rel="icon" type="image/png" href="favicon.png?v=8">
+  <link rel="stylesheet" href="css/estilos.css?v=8">
 </head>
 <body data-pagina="contacto">
   <div id="encabezado"></div>
@@ -16,7 +16,7 @@
       <div class="contenedor">
         <span class="kicker kicker--claro">Estamos para servirte</span>
         <h1>Contacto</h1>
-        <p class="hero-sub">Escríbenos — o mejor: date la vuelta. Estamos de lunes a viernes, de 2:00 a 8:00, en el fraccionamiento Santa Teresa.</p>
+        <p class="hero-sub">Llámanos, escríbenos o visítanos: lunes a viernes, de 2:00 a 8:00, en el fraccionamiento Santa Teresa.</p>
       </div>
       <svg class="ola" viewBox="0 0 1440 64" preserveAspectRatio="none" aria-hidden="true"><path class="ola-tras" d="M0,22 C240,58 480,-6 720,10 C960,26 1200,54 1440,16 L1440,64 L0,64 Z"/><path class="ola-frente" d="M0,38 C240,70 480,6 720,22 C960,38 1200,62 1440,30 L1440,64 L0,64 Z"/></svg>
     </section>
@@ -29,7 +29,7 @@
             <div class="tarjeta-icono"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg></div>
             <h3>Ubicación</h3>
             <p>Instalaciones de la Secundaria «Nueva Creación»<br>Calle Santa Liduvina S/N, entre Av. de los Reyes y Calle Santa Aurora<br>Fracc. Santa Teresa, C.P. 82090, Mazatlán, Sinaloa</p>
-            <a class="btn btn-azul" href="https://www.google.com/maps/search/?api=1&query=Calle+Santa+Liduvina+Santa+Teresa+Mazatl%C3%A1n" target="_blank" rel="noopener">Cómo llegar (Google Maps)</a>
+            <a class="btn btn-azul" href="https://www.google.com/maps/search/?api=1&query=Secundaria+Nueva+Creaci%C3%B3n+Santa+Teresa+Mazatl%C3%A1n" target="_blank" rel="noopener">Cómo llegar (Google Maps)</a>
           </div>
           <div class="tarjeta">
             <div class="tarjeta-icono"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
@@ -51,10 +51,10 @@
 
   <div id="pie"></div>
 
-  <script src="datos/config.js?v=7"></script>
-  <script src="datos/estatus.js?v=7"></script>
-  <script src="datos/avisos.js?v=7"></script>
-  <script src="js/app.js?v=7"></script>
+  <script src="datos/config.js?v=8"></script>
+  <script src="datos/estatus.js?v=8"></script>
+  <script src="datos/avisos.js?v=8"></script>
+  <script src="js/app.js?v=8"></script>
   <script>
     /* Medios de contacto: se pintan solo los que existen en datos/config.js */
     (function () {
@@ -78,6 +78,9 @@
       }
       if (C.facebook) {
         piezas.push('<div class="tarjeta"><h3>Facebook</h3><p>Síguenos para ver los avisos también en redes.</p><a class="btn btn-contorno" href="' + esc(C.facebook) + '" target="_blank" rel="noopener">Página oficial</a></div>');
+      }
+      if (C.instagram) {
+        piezas.push('<div class="tarjeta"><h3>Instagram</h3><p>La vida del plantel, en fotos.</p><a class="btn btn-contorno" href="' + esc(C.instagram) + '" target="_blank" rel="noopener">@cebmazatlan922</a></div>');
       }
       if (piezas.length) {
         caja.innerHTML = piezas.join("");

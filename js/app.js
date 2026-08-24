@@ -75,10 +75,10 @@
     var pagina = document.body.getAttribute("data-pagina") || "";
     var enlaces = [
       { url: "index.html", texto: "Inicio", id: "inicio" },
-      { url: "conocenos.html", texto: "Conócenos", id: "conocenos" },
-      { url: "oferta.html", texto: "Oferta educativa", id: "oferta" },
+      { url: "calendario.html", texto: "Calendario", id: "calendario" },
+      { url: "inscripciones.html", texto: "Aspirantes", id: "inscripciones" },
+      { url: "comunidad.html", texto: "Estudiantes y familias", id: "comunidad" },
       { url: "vida.html", texto: "Vida estudiantil", id: "vida" },
-      { url: "comunidad.html", texto: "Familias", id: "comunidad" },
       { url: "avisos.html", texto: "Avisos", id: "avisos" },
       { url: "contacto.html", texto: "Contacto", id: "contacto" },
     ];
@@ -106,7 +106,9 @@
       '<div class="barra-util"><div class="contenedor">' +
       '<nav class="util-enlaces" aria-label="Enlaces de acceso rápido">' +
       '<a href="estatus.html">¿Hay clases hoy?</a>' +
-      '<a href="comunidad.html#calendario">Calendario escolar</a>' +
+      '<a href="comunidad.html#horarios">Horarios</a>' +
+      '<a href="conocenos.html">Conócenos</a>' +
+      (C.appAsistencia ? '<a href="' + esc(C.appAsistencia) + '" target="_blank" rel="noopener">Asistencia</a>' : "") +
       (C.facebook ? '<a href="' + esc(C.facebook) + '" target="_blank" rel="noopener">Facebook</a>' : "") +
       (C.instagram ? '<a href="' + esc(C.instagram) + '" target="_blank" rel="noopener">Instagram</a>' : "") +
       "</nav>" +
@@ -166,12 +168,14 @@
       "</div>" +
       "<div><h2>Contacto</h2><ul>" + contacto + "</ul></div>" +
       "<div><h2>Accesos rápidos</h2><ul>" +
-      '<li><a href="inscripciones.html">Inscripciones</a></li>' +
-      '<li><a href="avisos.html">Avisos y comunicados</a></li>' +
+      '<li><a href="inscripciones.html">Aspirantes: inscríbete</a></li>' +
+      '<li><a href="comunidad.html#horarios">Horarios de grupo</a></li>' +
+      '<li><a href="calendario.html">Calendario de actividades</a></li>' +
+      '<li><a href="conocenos.html">Conócenos</a></li>' +
+      (C.appAsistencia ? '<li><a href="' + esc(C.appAsistencia) + '" target="_blank" rel="noopener">Pase de asistencia</a></li>' : "") +
       '<li><a href="estatus.html">¿Hay clases hoy?</a></li>' +
-      '<li><a href="vida.html">Vida estudiantil</a></li>' +
-      '<li><a href="comunidad.html">Horarios y calendario</a></li>' +
       '<li><a href="oferta.html">Oferta educativa</a></li>' +
+      '<li><a href="avisos.html">Avisos y comunicados</a></li>' +
       "</ul></div>" +
       "<div><h2>Canales oficiales</h2>" +
       "<p>La información oficial del plantel es únicamente la publicada en este sitio" +
@@ -179,7 +183,6 @@
       ".</p><ul>" +
       (C.facebook ? '<li><a href="' + esc(C.facebook) + '" target="_blank" rel="noopener">Facebook</a></li>' : "") +
       (C.instagram ? '<li><a href="' + esc(C.instagram) + '" target="_blank" rel="noopener">Instagram</a></li>' : "") +
-      '<li><a href="https://www.gob.mx/sep" target="_blank" rel="noopener">SEP · gob.mx</a></li>' +
       '<li><a href="privacidad.html">Aviso de privacidad</a></li>' +
       "</ul></div>" +
       "</div>" +
@@ -447,14 +450,29 @@
     if (!tabs || !caja || !window.HORARIOS) return;
     var DIAS = ["Hora", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes"];
 
+    /* Paleta fija por materia: cada una con su color, bien distinto del resto */
+    var COLORES_MATERIA = [
+      { busca: "NATURALES",      fondo: "#e3f5e1", borde: "#2e8b3d", texto: "#14501f" },
+      { busca: "MATEMÁTICO",     fondo: "#e1ecfb", borde: "#2563c4", texto: "#123c78" },
+      { busca: "LENGUA",         fondo: "#ffedd9", borde: "#d97416", texto: "#7a3d05" },
+      { busca: "INGLÉS",         fondo: "#efe4fb", borde: "#7c3aed", texto: "#44207e" },
+      { busca: "DIGITAL",        fondo: "#d9f4f7", borde: "#0e94a8", texto: "#075e6b" },
+      { busca: "SOCIALES",       fondo: "#fdf3cd", borde: "#c29b06", texto: "#6d5503" },
+      { busca: "FILOSÓFICO",     fondo: "#fbe3ef", borde: "#c92578", texto: "#711342" },
+      { busca: "BIOÉTICA",       fondo: "#f4e0f6", borde: "#9c34ad", texto: "#571b61" },
+      { busca: "CIUDADANA",      fondo: "#eff7d8", borde: "#7ba311", texto: "#40560a" },
+      { busca: "FÍSICAS",        fondo: "#fde5e0", borde: "#d9482f", texto: "#7c2114" },
+      { busca: "TURISMO",        fondo: "#dcf3ec", borde: "#0d9373", texto: "#06523f" },
+      { busca: "HOSPEDAJE",      fondo: "#f3e9df", borde: "#96622d", texto: "#57351a" },
+      { busca: "SOCIOEMOCIONAL", fondo: "#f5edd2", borde: "#a08415", texto: "#5c4a08" },
+    ];
+
     function colorMateria(nombre) {
-      var h = 0;
-      for (var i = 0; i < nombre.length; i++) h = (h * 31 + nombre.charCodeAt(i)) % 360;
-      return {
-        fondo: "hsl(" + h + ", 70%, 93%)",
-        borde: "hsl(" + h + ", 45%, 52%)",
-        texto: "hsl(" + h + ", 60%, 20%)",
-      };
+      var N = nombre.toUpperCase();
+      for (var i = 0; i < COLORES_MATERIA.length; i++) {
+        if (N.indexOf(COLORES_MATERIA[i].busca) !== -1) return COLORES_MATERIA[i];
+      }
+      return { fondo: "#eef1f6", borde: "#8a97ad", texto: "#39445a" };
     }
 
     function pintarGrupo(g) {
