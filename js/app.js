@@ -8,6 +8,8 @@
 (function () {
   "use strict";
 
+  document.documentElement.classList.add("js");
+
   var C = window.CONFIG || {};
   var ESTATUS = window.ESTATUS || { estado: "normal" };
 
@@ -24,13 +26,17 @@
   var MESES = ["enero", "febrero", "marzo", "abril", "mayo", "junio",
     "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
 
-  /* ---------- Escudo del plantel (SVG inline) ---------- */
+  /* ---------- Escudo del plantel (SVG inline): antorcha, libro abierto y olas ---------- */
   var ESCUDO =
     '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Escudo CEB 9/22">' +
-    '<path d="M32 2 58 10v22c0 15-11 25-26 30C17 57 6 47 6 32V10Z" fill="#611232"/>' +
-    '<path d="M32 6.5 54 13.4v18.4c0 12.6-9.2 21.3-22 25.9-12.8-4.6-22-13.3-22-25.9V13.4Z" fill="none" stroke="#bc955c" stroke-width="2"/>' +
-    '<text x="32" y="30" text-anchor="middle" font-family="Georgia, serif" font-weight="700" font-size="13" fill="#f6efe4">CEB</text>' +
-    '<text x="32" y="46" text-anchor="middle" font-family="Georgia, serif" font-weight="700" font-size="13" fill="#bc955c">9/22</text>' +
+    '<path d="M32 2 58 10v22c0 15-11 25-26 30C17 57 6 47 6 32V10Z" fill="#1b2559"/>' +
+    '<path d="M32 6.5 54 13.4v18.4c0 12.6-9.2 21.3-22 25.9-12.8-4.6-22-13.3-22-25.9V13.4Z" fill="none" stroke="#4cc2d6" stroke-width="2"/>' +
+    '<path d="M32 11c3 3.4 4.6 5.8 4.6 8.2 0 2.9-2 4.8-4.6 4.8s-4.6-1.9-4.6-4.8c0-2.4 1.6-4.8 4.6-8.2Z" fill="#8fd8e4"/>' +
+    '<path d="M29.3 25.2h5.4l-1.1 4h-3.2Z" fill="#ffffff"/>' +
+    '<rect x="30.9" y="29.4" width="2.2" height="5.6" fill="#ffffff"/>' +
+    '<path d="M32 40c-4.6-3-10.4-3.2-14-1.6v7.2c3.6-1.6 9.4-1.4 14 1.8Z" fill="#ffffff"/>' +
+    '<path d="M32 40c4.6-3 10.4-3.2 14-1.6v7.2c-3.6-1.6-9.4-1.4-14 1.8Z" fill="#cdeef4"/>' +
+    '<path d="M22 52.5c2.5-2 5-2 7.5 0s5 2 7.5 0c1.8-1.4 3.4-1.7 5-0.8" fill="none" stroke="#4cc2d6" stroke-width="1.8" stroke-linecap="round"/>' +
     '</svg>';
 
   /* ---------- Utilidades ---------- */
@@ -117,7 +123,7 @@
       '<div class="nav-principal"><div class="contenedor">' +
       '<a class="marca" href="index.html">' + ESCUDO +
       '<span class="marca-texto"><span class="marca-nombre">' + esc(C.nombreCorto || "CEB 9/22") + "</span>" +
-      '<span class="marca-lugar">' + esc(C.ciudad || "") + " · DGB · SEP</span></span></a>" +
+      '<span class="marca-lugar">' + esc(C.eponimo ? "«" + C.eponimo + "»" : (C.ciudad || "") + " · DGB · SEP") + "</span></span></a>" +
       '<button class="nav-hamburguesa" aria-expanded="false" aria-controls="menu-principal" aria-label="Abrir menú">' +
       '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>' +
       "</button>" +
@@ -128,7 +134,7 @@
       }).join("") +
       '<li class="nav-cta-movil"><a href="inscripciones.html">Inscripciones ' + esc(C.ciclo || "") + "</a></li>" +
       "</ul>" +
-      '<div class="nav-cta"><a class="btn btn-oro" href="inscripciones.html">Inscripciones</a></div>' +
+      '<div class="nav-cta"><a class="btn btn-acento" href="inscripciones.html">Inscripciones</a></div>' +
       "</div></div>";
 
     sitio.innerHTML = html;
@@ -157,7 +163,9 @@
     if (C.correo) contacto += '<li><a href="mailto:' + esc(C.correo) + '">' + esc(C.correo) + "</a></li>";
 
     sitio.innerHTML =
-      '<footer class="pie"><div class="contenedor">' +
+      '<footer class="pie">' +
+      '<div class="pie-marca-agua" aria-hidden="true">' + ESCUDO + "</div>" +
+      '<div class="contenedor">' +
       '<div class="pie-rejilla">' +
       "<div>" +
       '<div class="pie-marca">' + ESCUDO + '<span class="pie-marca-nombre">' + esc(C.nombre || "") + "</span></div>" +
@@ -177,6 +185,7 @@
       (C.facebook ? ' y en nuestra <a href="' + esc(C.facebook) + '" target="_blank" rel="noopener">página de Facebook</a>' : "") +
       ".</p><ul>" +
       (C.facebook ? '<li><a href="' + esc(C.facebook) + '" target="_blank" rel="noopener">Facebook</a></li>' : "") +
+      (C.instagram ? '<li><a href="' + esc(C.instagram) + '" target="_blank" rel="noopener">Instagram</a></li>' : "") +
       '<li><a href="https://www.gob.mx/sep" target="_blank" rel="noopener">SEP · gob.mx</a></li>' +
       '<li><a href="privacidad.html">Aviso de privacidad</a></li>' +
       "</ul></div>" +
@@ -285,7 +294,7 @@
       caja.innerHTML =
         '<div class="aviso-cuerpo centrado"><h1>Aviso no encontrado</h1>' +
         '<p>Es posible que el enlace esté incompleto o que el aviso ya no esté disponible.</p>' +
-        '<a class="btn btn-guinda" href="avisos.html">Ver todos los avisos</a></div>';
+        '<a class="btn btn-azul" href="avisos.html">Ver todos los avisos</a></div>';
       return;
     }
 
@@ -307,7 +316,7 @@
         ? '<a class="aviso-adjunto" href="' + esc(aviso.enlace) + '" target="_blank" rel="noopener">📄 ' + esc(aviso.enlaceTexto || "Ver documento adjunto") + "</a>"
         : "") +
       '<div class="aviso-compartir">' +
-      '<a class="btn btn-guinda" href="https://wa.me/?text=' + textoWa + '" target="_blank" rel="noopener">Compartir por WhatsApp</a>' +
+      '<a class="btn btn-azul" href="https://wa.me/?text=' + textoWa + '" target="_blank" rel="noopener">Compartir por WhatsApp</a>' +
       '<button class="btn btn-contorno" id="btn-copiar">Copiar enlace</button>' +
       "</div></div>";
 
@@ -346,6 +355,22 @@
       "</div>";
   }
 
+  /* ---------- Animación de aparición al hacer scroll ---------- */
+  function animarAparicion() {
+    if (!("IntersectionObserver" in window)) return;
+    var objetivos = document.querySelectorAll(".rev, .tarjeta, .paso, .cifra, .info-item, .aviso-tarjeta, .cita");
+    var obs = new IntersectionObserver(function (entradas) {
+      entradas.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add("visto"); obs.unobserve(en.target); }
+      });
+    }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
+    objetivos.forEach(function (el, i) {
+      el.classList.add("rev");
+      el.style.transitionDelay = (i % 4) * 70 + "ms";
+      obs.observe(el);
+    });
+  }
+
   /* ---------- Arranque ---------- */
   document.addEventListener("DOMContentLoaded", function () {
     try { pintarEncabezado(); } catch (e) { /* nunca tumbar la página */ }
@@ -354,5 +379,6 @@
     try { pintarListaAvisos(); } catch (e) {}
     try { pintarAvisoDetalle(); } catch (e) {}
     try { pintarEstatus(); } catch (e) {}
+    try { animarAparicion(); } catch (e) {}
   });
 })();
