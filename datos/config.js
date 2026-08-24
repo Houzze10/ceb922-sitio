@@ -25,5 +25,6 @@ window.CONFIG = {
   correo: "direccion922@dgb.edu.mx",
   facebook: "https://www.facebook.com/profile.php?id=61588295243244",
   instagram: "https://www.instagram.com/cebmazatlan922/",
-  cct: "",                    // PENDIENTE — Clave de Centro de Trabajo
+  cct: "25DBP0001D",
+  appInscripcion: "https://inscripcionceb922.netlify.app",
 };

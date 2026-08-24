@@ -77,7 +77,8 @@
       { url: "index.html", texto: "Inicio", id: "inicio" },
       { url: "conocenos.html", texto: "Conócenos", id: "conocenos" },
       { url: "oferta.html", texto: "Oferta educativa", id: "oferta" },
-      { url: "comunidad.html", texto: "Estudiantes y familias", id: "comunidad" },
+      { url: "vida.html", texto: "Vida estudiantil", id: "vida" },
+      { url: "comunidad.html", texto: "Familias", id: "comunidad" },
       { url: "avisos.html", texto: "Avisos", id: "avisos" },
       { url: "contacto.html", texto: "Contacto", id: "contacto" },
     ];
@@ -168,7 +169,8 @@
       '<li><a href="inscripciones.html">Inscripciones</a></li>' +
       '<li><a href="avisos.html">Avisos y comunicados</a></li>' +
       '<li><a href="estatus.html">¿Hay clases hoy?</a></li>' +
-      '<li><a href="comunidad.html">Estudiantes y familias</a></li>' +
+      '<li><a href="vida.html">Vida estudiantil</a></li>' +
+      '<li><a href="comunidad.html">Horarios y calendario</a></li>' +
       '<li><a href="oferta.html">Oferta educativa</a></li>' +
       "</ul></div>" +
       "<div><h2>Canales oficiales</h2>" +
@@ -302,6 +304,7 @@
       (aviso.vence ? '<span class="aviso-fecha">· Vigente hasta el ' + fechaLarga(aviso.vence) + "</span>" : "") +
       "</div>" +
       "<h1>" + esc(aviso.titulo) + "</h1>" +
+      (aviso.imagen ? '<p><img src="' + esc(aviso.imagen) + '" alt="' + esc(aviso.imagenAlt || aviso.titulo) + '" style="border-radius:12px;box-shadow:var(--sombra)" loading="lazy"></p>' : "") +
       (aviso.cuerpo || "<p>" + esc(aviso.resumen || "") + "</p>") +
       (aviso.enlace
         ? '<a class="aviso-adjunto" href="' + esc(aviso.enlace) + '" target="_blank" rel="noopener">📄 ' + esc(aviso.enlaceTexto || "Ver documento adjunto") + "</a>"
@@ -346,6 +349,141 @@
       "</div>";
   }
 
+  /* ---------- Vida estudiantil (vida.html) ---------- */
+  function pintarVida() {
+    var caja = document.getElementById("vida-eventos");
+    if (!caja || !window.EVENTOS) return;
+
+    caja.innerHTML = window.EVENTOS.map(function (ev) {
+      if (!ev || !ev.titulo || !ev.fotos || !ev.fotos.length) return "";
+      return (
+        '<article class="evento-bloque" id="' + esc(ev.id || "") + '">' +
+        '<div class="evento-cabeza rev"><h2>' + esc(ev.titulo) + "</h2>" +
+        (ev.descripcion ? "<p>" + esc(ev.descripcion) + "</p>" : "") +
+        "</div>" +
+        '<div class="evento-fotos">' +
+        ev.fotos.map(function (f) {
+          return (
+            '<figure tabindex="0" role="button" aria-label="Ampliar: ' + esc(f.pie || f.alt) + '" data-src="' + esc(f.src) + '" data-pie="' + esc(f.pie || "") + '">' +
+            '<img src="' + esc(f.src) + '" alt="' + esc(f.alt || "") + '" loading="lazy">' +
+            (f.pie ? "<figcaption>" + esc(f.pie) + "</figcaption>" : "") +
+            "</figure>"
+          );
+        }).join("") +
+        "</div></article>"
+      );
+    }).join("");
+
+    /* Visor (lightbox) */
+    var visor = document.getElementById("visor");
+    var visorImg = document.getElementById("visor-img");
+    var visorPie = document.getElementById("visor-pie");
+    var visorCerrar = document.getElementById("visor-cerrar");
+    if (!visor || !visorImg) return;
+
+    function abrir(fig) {
+      visorImg.src = fig.getAttribute("data-src");
+      visorImg.alt = fig.querySelector("img") ? fig.querySelector("img").alt : "";
+      visorPie.textContent = fig.getAttribute("data-pie") || "";
+      visor.hidden = false;
+      document.body.style.overflow = "hidden";
+      visorCerrar.focus();
+    }
+    function cerrar() {
+      visor.hidden = true;
+      visorImg.src = "";
+      document.body.style.overflow = "";
+    }
+    caja.querySelectorAll("figure").forEach(function (fig) {
+      fig.addEventListener("click", function () { abrir(fig); });
+      fig.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); abrir(fig); }
+      });
+    });
+    visor.addEventListener("click", function (e) { if (e.target === visor) cerrar(); });
+    visorCerrar.addEventListener("click", cerrar);
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !visor.hidden) cerrar(); });
+  }
+
+  /* ---------- Horarios de grupo (comunidad.html) ---------- */
+  function pintarHorarios() {
+    var tabs = document.getElementById("horario-tabs");
+    var caja = document.getElementById("horario-tabla");
+    if (!tabs || !caja || !window.HORARIOS) return;
+    var DIAS = ["Hora", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes"];
+
+    function colorMateria(nombre) {
+      var h = 0;
+      for (var i = 0; i < nombre.length; i++) h = (h * 31 + nombre.charCodeAt(i)) % 360;
+      return {
+        fondo: "hsl(" + h + ", 70%, 93%)",
+        borde: "hsl(" + h + ", 45%, 52%)",
+        texto: "hsl(" + h + ", 60%, 20%)",
+      };
+    }
+
+    function pintarGrupo(g) {
+      var html = '<div class="tabla-scroll"><table class="horario"><caption class="sr-only">Horario del grupo ' + esc(g.grupo) + "</caption><thead><tr>";
+      DIAS.forEach(function (d) { html += "<th>" + d + "</th>"; });
+      html += "</tr></thead><tbody>";
+      g.filas.forEach(function (fila) {
+        html += '<tr><th scope="row">' + esc(fila[0]) + "</th>";
+        for (var i = 1; i <= 5; i++) {
+          var m = fila[i];
+          if (m === "RECESO") {
+            html += '<td class="celda-receso">Receso</td>';
+          } else if (!m) {
+            html += '<td class="celda-libre">—</td>';
+          } else {
+            var c = colorMateria(m);
+            html += '<td class="celda-materia" style="background:' + c.fondo + ";border-left:4px solid " + c.borde + ";color:" + c.texto + '">' + esc(m) + "</td>";
+          }
+        }
+        html += "</tr>";
+      });
+      html += "</tbody></table></div>" +
+        '<div class="horario-pie"><span class="texto-suave">' + esc(g.semestre) + " · turno vespertino · " + esc(window.HORARIOS.ciclo) + "</span>" +
+        '<a class="btn btn-contorno" href="' + esc(g.pdf) + '" target="_blank" rel="noopener">📄 Descargar en PDF</a></div>';
+      caja.innerHTML = html;
+    }
+
+    window.HORARIOS.grupos.forEach(function (g, i) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = "horario-tab" + (i === 0 ? " activo" : "");
+      b.setAttribute("role", "tab");
+      b.textContent = "Grupo " + g.grupo;
+      b.addEventListener("click", function () {
+        tabs.querySelectorAll(".horario-tab").forEach(function (x) { x.classList.remove("activo"); });
+        b.classList.add("activo");
+        pintarGrupo(g);
+      });
+      tabs.appendChild(b);
+    });
+    pintarGrupo(window.HORARIOS.grupos[0]);
+  }
+
+  /* ---------- Calendario de actividades (comunidad.html) ---------- */
+  function pintarCalendario() {
+    var caja = document.getElementById("calendario-lista");
+    if (!caja || !window.CALENDARIO) return;
+    var hoy = hoyISO();
+    var lista = window.CALENDARIO.filter(function (c) {
+      return c && c.evento && (!c.vence || !FECHA_ISO.test(c.vence) || c.vence >= hoy);
+    });
+    if (!lista.length) {
+      caja.innerHTML = '<p class="sin-resultados">Las próximas fechas del plantel se publicarán aquí.</p>';
+      return;
+    }
+    caja.innerHTML = lista.map(function (c, i) {
+      return '<div class="fecha-tarjeta fecha-tono-' + (i % 6) + '">' +
+        "<strong>" + esc(c.evento) + "</strong>" +
+        '<span class="fecha-cuando">' + esc(c.fecha) + "</span>" +
+        (c.detalle ? "<p>" + esc(c.detalle) + "</p>" : "") +
+        "</div>";
+    }).join("");
+  }
+
   /* ---------- Animación de aparición al hacer scroll ---------- */
   function animarAparicion() {
     if (!("IntersectionObserver" in window)) return;
@@ -370,6 +508,9 @@
     try { pintarListaAvisos(); } catch (e) {}
     try { pintarAvisoDetalle(); } catch (e) {}
     try { pintarEstatus(); } catch (e) {}
+    try { pintarVida(); } catch (e) {}
+    try { pintarHorarios(); } catch (e) {}
+    try { pintarCalendario(); } catch (e) {}
     try { animarAparicion(); } catch (e) {}
   });
 })();

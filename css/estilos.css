@@ -216,7 +216,7 @@ html.js .rev.visto { opacity: 1; transform: none; }
 }
 .nav-hamburguesa svg { width: 24px; height: 24px; }
 
-@media (max-width: 960px) {
+@media (max-width: 1199px) {
   .nav-enlaces {
     display: none;
     position: absolute; top: 100%; left: 0; right: 0;
@@ -235,7 +235,7 @@ html.js .rev.visto { opacity: 1; transform: none; }
     font-weight: 700; border-radius: 999px;
   }
 }
-@media (min-width: 961px) { .nav-cta-movil { display: none; } }
+@media (min-width: 1200px) { .nav-cta-movil { display: none; } }
 
 /* ---------- Hero ---------- */
 .hero {
@@ -277,13 +277,54 @@ html.js .rev.visto { opacity: 1; transform: none; }
 
 .hero-arte { display: none; }
 @media (min-width: 940px) {
-  .hero-arte { display: block; max-width: 430px; margin-left: auto; }
+  .hero-arte { display: block; max-width: 430px; margin-left: auto; text-decoration: none; text-align: center; }
   .hero-arte svg { width: 100%; height: auto; }
+  .hero-arte-pie {
+    display: inline-block; margin-top: 4px; color: var(--turquesa-claro);
+    font-size: 0.9rem; font-weight: 600; opacity: 0.85;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+  .hero-arte:hover .hero-arte-pie { opacity: 1; transform: translateX(4px); }
+  .hero-arte:hover .faro-rayos { opacity: 1; }
+
+  /* El faro está vivo: la luz respira, las olas caminan, las estrellas titilan */
+  .faro-rayos { animation: faro-luz 3.2s ease-in-out infinite; transform-origin: 220px 124px; }
+  .faro-halo { animation: faro-halo 3.2s ease-in-out infinite; }
+  .faro-ola { animation: faro-ola 6s ease-in-out infinite; }
+  .faro-ola-2 { animation-delay: -2s; }
+  .faro-ola-3 { animation-delay: -4s; }
+  .faro-estrella { animation: faro-titila 2.6s ease-in-out infinite; }
+  .faro-tarde { animation-delay: -1.3s; }
+  .faro-anillo { animation: faro-gira 60s linear infinite; transform-origin: 220px 220px; }
+}
+@keyframes faro-luz {
+  0%, 100% { opacity: 0.35; }
+  50% { opacity: 1; }
+}
+@keyframes faro-halo {
+  0%, 100% { fill-opacity: 0.05; }
+  50% { fill-opacity: 0.16; }
+}
+@keyframes faro-ola {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(-14px); }
+}
+@keyframes faro-titila {
+  0%, 100% { opacity: 0.25; }
+  50% { opacity: 0.9; }
+}
+@keyframes faro-gira {
+  to { transform: rotate(360deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .faro-rayos, .faro-halo, .faro-ola, .faro-estrella, .faro-anillo { animation: none; }
 }
 
 /* ---------- Galería de vida escolar ---------- */
 .galeria { display: grid; gap: var(--e3); grid-template-columns: 1fr; }
-@media (min-width: 700px) { .galeria { grid-template-columns: repeat(4, 1fr); } }
+@media (min-width: 700px) { .galeria { grid-template-columns: repeat(3, 1fr); } }
+.galeria .destacada { grid-column: 1 / -1; }
+.galeria .destacada img { aspect-ratio: 21 / 9; }
 .galeria figure {
   margin: 0; border-radius: var(--radio); overflow: hidden;
   background: var(--blanco); box-shadow: var(--sombra);
@@ -295,6 +336,44 @@ html.js .rev.visto { opacity: 1; transform: none; }
 .galeria img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
 .galeria figcaption { padding: 14px var(--e2); font-size: 0.9rem; color: var(--tinta-suave); }
 .galeria figcaption strong { color: var(--azul-800); display: block; font-size: 0.95rem; }
+
+/* ---------- Página de vida estudiantil ---------- */
+.evento-bloque { margin-bottom: var(--e8); }
+.evento-bloque:last-child { margin-bottom: 0; }
+.evento-cabeza { max-width: 62ch; margin-bottom: var(--e3); }
+.evento-cabeza h2 { margin-bottom: var(--e1); }
+.evento-cabeza p { color: var(--tinta-suave); margin: 0; }
+.evento-fotos { display: grid; gap: var(--e2); grid-template-columns: 1fr; }
+@media (min-width: 640px) { .evento-fotos { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 980px) { .evento-fotos { grid-template-columns: repeat(3, 1fr); } }
+.evento-fotos figure {
+  margin: 0; border-radius: var(--radio); overflow: hidden; position: relative;
+  box-shadow: var(--sombra); cursor: zoom-in; background: var(--azul-100);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.evento-fotos figure:hover { transform: translateY(-3px); box-shadow: var(--sombra-alta); }
+.evento-fotos img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block; }
+.evento-fotos figcaption {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  padding: 22px 14px 10px; color: #fff; font-size: 0.85rem; font-weight: 500;
+  background: linear-gradient(transparent, rgba(13, 19, 48, 0.78));
+}
+
+/* Visor de imagen (lightbox) */
+.visor {
+  position: fixed; inset: 0; z-index: 300;
+  background: rgba(13, 19, 48, 0.92);
+  display: flex; align-items: center; justify-content: center; padding: var(--e3);
+}
+.visor figure { margin: 0; max-width: min(1100px, 100%); max-height: 100%; text-align: center; }
+.visor img { max-width: 100%; max-height: 82vh; border-radius: 12px; box-shadow: 0 24px 60px rgba(0,0,0,0.5); }
+.visor figcaption { color: #cfe0ea; margin-top: 12px; font-size: 0.95rem; }
+.visor-cerrar {
+  position: absolute; top: 18px; right: 18px;
+  width: 48px; height: 48px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.4);
+  background: rgba(255,255,255,0.08); color: #fff; font-size: 1.2rem; cursor: pointer;
+}
+.visor-cerrar:hover { background: rgba(255,255,255,0.2); }
 
 /* Foto suelta con marco */
 .foto-marco { margin: 0; border-radius: var(--radio); overflow: hidden; box-shadow: var(--sombra-alta); }
@@ -524,6 +603,56 @@ html.js .rev.visto { opacity: 1; transform: none; }
 .info-item { background: var(--blanco); border-radius: var(--radio-chico); box-shadow: var(--sombra); padding: var(--e2) var(--e3); }
 .info-item strong { color: var(--azul-800); }
 .info-item p { margin: 4px 0 0; color: var(--tinta-suave); font-size: 0.95rem; }
+
+/* ---------- Horarios de grupo ---------- */
+.horario-tabs { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: var(--e3); }
+.horario-tab {
+  border: 2px solid var(--linea); background: var(--blanco); color: var(--tinta);
+  border-radius: 999px; padding: 10px 22px; font-family: var(--f-texto);
+  font-weight: 600; font-size: 1rem; cursor: pointer; min-height: 46px;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+.horario-tab:hover { border-color: var(--turquesa); }
+.horario-tab.activo { background: var(--azul-800); border-color: var(--azul-800); color: #fff; }
+
+.tabla-scroll { overflow-x: auto; border-radius: var(--radio); box-shadow: var(--sombra); background: var(--blanco); }
+table.horario { border-collapse: collapse; width: 100%; min-width: 760px; font-size: 0.82rem; }
+table.horario th, table.horario td { padding: 10px 10px; text-align: left; vertical-align: middle; }
+table.horario thead th {
+  background: var(--azul-800); color: #fff; font-family: var(--f-texto);
+  font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; position: sticky; top: 0;
+}
+table.horario tbody th {
+  background: var(--azul-100); color: var(--azul-800); font-weight: 700;
+  white-space: nowrap; font-size: 0.8rem;
+}
+table.horario tbody tr + tr { border-top: 1px solid var(--linea); }
+.celda-materia { font-weight: 600; line-height: 1.25; }
+.celda-receso {
+  background: repeating-linear-gradient(-45deg, #eef2f7, #eef2f7 8px, #e3e9f1 8px, #e3e9f1 16px);
+  color: var(--tinta-suave); text-align: center; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; font-size: 0.72rem;
+}
+.celda-libre { color: #b6c1d2; text-align: center; }
+.horario-pie { display: flex; justify-content: space-between; align-items: center; gap: var(--e2); flex-wrap: wrap; margin-top: var(--e2); }
+
+/* ---------- Calendario de actividades ---------- */
+.calendario-rejilla { display: grid; gap: var(--e3); grid-template-columns: 1fr; }
+@media (min-width: 700px) { .calendario-rejilla { grid-template-columns: repeat(3, 1fr); } }
+.fecha-tarjeta {
+  border-radius: var(--radio); padding: var(--e3) var(--e3);
+  box-shadow: var(--sombra); border-top: 5px solid var(--ft-borde, var(--turquesa));
+  background: var(--ft-fondo, var(--blanco));
+  display: flex; flex-direction: column; gap: 8px;
+}
+.fecha-tarjeta strong { color: var(--azul-800); font-size: 1.02rem; line-height: 1.3; }
+.fecha-tarjeta .fecha-cuando { font-family: var(--f-display); font-weight: 700; font-size: 1.2rem; color: var(--azul-900); }
+.fecha-tarjeta p { margin: 0; color: var(--tinta-suave); font-size: 0.92rem; }
+.fecha-tono-0 { --ft-fondo: #e8f2fb; --ft-borde: #1c5fa8; }
+.fecha-tono-1 { --ft-fondo: #e6f6ec; --ft-borde: #1e7d4f; }
+.fecha-tono-2 { --ft-fondo: #fdeee2; --ft-borde: #b3571a; }
+.fecha-tono-3 { --ft-fondo: #f6e9f4; --ft-borde: #8a3f7c; }
+.fecha-tono-4 { --ft-fondo: #fdf6dd; --ft-borde: #9a7b17; }
+.fecha-tono-5 { --ft-fondo: #ece9fb; --ft-borde: #5b4bb5; }
 
 /* ---------- Pie de página ---------- */
 .pie { background: var(--azul-950); color: #a9b8cf; margin-top: var(--e8); position: relative; overflow: hidden; border-top: 4px solid var(--turquesa); }

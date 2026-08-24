@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Estudiantes y familias · CEB 9/22 Mazatlán</title>
   <meta name="description" content="Horarios, calendario escolar, trámites de control escolar y canales de comunicación del CEB 9/22 de Mazatlán para estudiantes, madres y padres de familia.">
-  <link rel="icon" type="image/png" href="favicon.png?v=4">
-  <link rel="stylesheet" href="css/estilos.css?v=4">
+  <link rel="icon" type="image/png" href="favicon.png?v=5">
+  <link rel="stylesheet" href="css/estilos.css?v=5">
 </head>
 <body data-pagina="comunidad">
   <div id="encabezado"></div>
@@ -16,7 +16,7 @@
       <div class="contenedor">
         <span class="kicker kicker--claro">Comunidad CEB 9/22</span>
         <h1>Estudiantes y familias</h1>
-        <p class="hero-sub">Lo que necesitas para el día a día: horarios, calendario, trámites y cómo comunicarte con el plantel.</p>
+        <p class="hero-sub">Una escuela donde las familias entran por la puerta grande: aquí se estudia, se convive y siempre se sabe con quién.</p>
       </div>
       <svg class="ola" viewBox="0 0 1440 64" preserveAspectRatio="none" aria-hidden="true"><path class="ola-tras" d="M0,22 C240,58 480,-6 720,10 C960,26 1200,54 1440,16 L1440,64 L0,64 Z"/><path class="ola-frente" d="M0,38 C240,70 480,6 720,22 C960,38 1200,62 1440,30 L1440,64 L0,64 Z"/></svg>
     </section>
@@ -25,20 +25,32 @@
       <div class="contenedor">
         <span class="kicker">Horario y acceso</span>
         <h2>Turno vespertino</h2>
-        <p>El CEB 9/22 opera en <strong>turno vespertino, de 14:00 a 20:00 h</strong>, dentro de las instalaciones de la Secundaria «Nueva Creación» (calle Santa Liduvina S/N, Fracc. Santa Teresa). Por compartir plantel con la secundaria, es importante respetar los horarios de entrada y salida que se comunican al inicio de cada semestre.</p>
+        <p>Trabajamos de lunes a viernes, de <strong>2:00 a 8:00 de la tarde</strong>, en las instalaciones de la Secundaria «Nueva Creación» (calle Santa Liduvina S/N, Fracc. Santa Teresa). Mientras el puerto baja el ritmo, aquí apenas vamos agarrando vuelo — y las familias saben en todo momento dónde y con quién están sus hijos.</p>
         <div class="nota">
           <p>Ante mal tiempo o cualquier contingencia, consulta siempre la página <a href="estatus.html"><strong>¿Hay clases hoy?</strong></a> — es el lugar oficial donde el plantel publica el estado del día.</p>
         </div>
       </div>
     </section>
 
+    <section class="seccion seccion--apretada" id="horarios">
+      <div class="contenedor">
+        <span class="kicker">Semestre A · 2026-2027</span>
+        <h2>Horarios de <em>grupo</em></h2>
+        <p class="intro-seccion">Elige tu grupo y ve tu semana completa, con cada materia en su color. Aquí solo se publican los horarios del alumnado.</p>
+        <div class="horario-tabs mt-4" id="horario-tabs" role="tablist" aria-label="Elegir grupo"></div>
+        <div id="horario-tabla"></div>
+        <div class="nota">
+          <p><strong>Nuevo ingreso (grupos 101 y 102):</strong> antes de arrancar el semestre se cursa el propedéutico EDIEMS, en jornada de 14:00 a 18:00. <a href="docs/propedeutico-ediems-2026-2027.pdf" target="_blank" rel="noopener">Descarga aquí su horario completo (PDF)</a>.</p>
+        </div>
+      </div>
+    </section>
+
     <section class="seccion seccion--apretada" id="calendario">
       <div class="contenedor">
-        <span class="kicker">Fechas del ciclo</span>
-        <h2>Calendario escolar</h2>
-        <p>El plantel se rige por el calendario escolar oficial de la SEP para el ciclo 2026-2027: inicio y fin de cursos, periodos vacacionales, días de consejo técnico y suspensiones oficiales.</p>
-        <p>Los ajustes propios del plantel (juntas, entrega de calificaciones, eventos) se publican en la sección de <a href="avisos.html">Avisos</a>.</p>
-        <a class="btn btn-contorno" href="https://www.gob.mx/sep" target="_blank" rel="noopener">Calendario oficial · SEP</a>
+        <span class="kicker">Fechas que importan</span>
+        <h2>Calendario de actividades</h2>
+        <p class="intro-seccion">El calendario propio del CEB 9/22: lo que viene, con su fecha, publicado por la Dirección. Si cambia algo, aquí se actualiza primero.</p>
+        <div class="calendario-rejilla mt-4" id="calendario-lista"></div>
       </div>
     </section>
 
@@ -76,11 +88,7 @@
       <div class="contenedor">
         <span class="kicker">Convivencia</span>
         <h2>Una escuela ordenada y segura</h2>
-        <p>El plantel trabaja bajo los lineamientos de convivencia y cultura de paz de la Nueva Escuela Mexicana. El reglamento escolar se entrega y explica al momento de la inscripción, y cualquier situación se atiende directamente con la Dirección — la puerta siempre está abierta para madres y padres de familia.</p>
-        <figure class="foto-marco mt-4 rev">
-          <img src="img/comunidad-junta.webp" alt="Reunión de la Dirección con madres y padres de familia en un aula del plantel" loading="lazy" width="1200" height="900">
-          <figcaption>Reunión con madres y padres de familia en el plantel: la comunicación directa es parte de nuestra forma de trabajar.</figcaption>
-        </figure>
+        <p>Somos una comunidad chica y eso se nota para bien: maestros que te conocen por tu nombre, compañeros que se vuelven equipo y una regla sencilla que sostiene todo lo demás: aquí nos tratamos con respeto. El reglamento se entrega y explica al inscribirte, y cualquier situación se atiende directamente con la Dirección.</p>
         <div class="rejilla rejilla-2 mt-4">
           <div class="tarjeta">
             <h3>Canales oficiales</h3>
@@ -99,9 +107,11 @@
 
   <div id="pie"></div>
 
-  <script src="datos/config.js?v=4"></script>
-  <script src="datos/estatus.js?v=4"></script>
-  <script src="datos/avisos.js?v=4"></script>
-  <script src="js/app.js?v=4"></script>
+  <script src="datos/config.js?v=5"></script>
+  <script src="datos/estatus.js?v=5"></script>
+  <script src="datos/avisos.js?v=5"></script>
+  <script src="datos/horarios.js?v=5"></script>
+  <script src="datos/calendario.js?v=5"></script>
+  <script src="js/app.js?v=5"></script>
 </body>
 </html>
