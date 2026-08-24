@@ -75,13 +75,32 @@
     var pagina = document.body.getAttribute("data-pagina") || "";
     var enlaces = [
       { url: "index.html", texto: "Inicio", id: "inicio" },
-      { url: "calendario.html", texto: "Calendario", id: "calendario" },
-      { url: "inscripciones.html", texto: "Aspirantes", id: "inscripciones" },
-      { url: "comunidad.html", texto: "Estudiantes y familias", id: "comunidad" },
+      {
+        url: "inscripciones.html", texto: "Aspirantes", id: "inscripciones",
+        hijos: [
+          { url: "inscripciones.html", texto: "Cómo inscribirte" },
+          { url: "beca.html", texto: "Beca Benito Juárez" },
+          { url: "oferta.html", texto: "Qué vas a estudiar" },
+          { url: "conocenos.html", texto: "Conoce el plantel" },
+        ],
+      },
+      {
+        url: "comunidad.html", texto: "Estudiantes y familias", id: "comunidad",
+        hijos: [
+          { url: "calendario.html", texto: "Calendario de actividades" },
+          { url: "comunidad.html#horarios", texto: "Horarios de grupo" },
+          { url: C.appAsistencia || "comunidad.html#asistencia", texto: "Pase de asistencia", externo: !!C.appAsistencia },
+          { url: "comunidad.html#tramites", texto: "Trámites" },
+          { url: "estatus.html", texto: "¿Hay clases hoy?" },
+        ],
+      },
       { url: "vida.html", texto: "Vida estudiantil", id: "vida" },
       { url: "avisos.html", texto: "Avisos", id: "avisos" },
       { url: "contacto.html", texto: "Contacto", id: "contacto" },
     ];
+
+    /* páginas hijas que iluminan a su padre en el menú */
+    var PADRES = { calendario: "comunidad", oferta: "inscripciones", conocenos: "inscripciones", estatus: "comunidad" };
 
     var franja = "";
     if (ESTATUS.estado === "aviso" || ESTATUS.estado === "emergencia") {
@@ -123,8 +142,18 @@
       "</button>" +
       '<ul class="nav-enlaces" id="menu-principal">' +
       enlaces.map(function (e) {
-        var actual = e.id === pagina ? ' aria-current="page"' : "";
-        return '<li><a href="' + e.url + '"' + actual + ">" + e.texto + "</a></li>";
+        var activo = e.id === pagina || PADRES[pagina] === e.id;
+        var actual = activo ? ' aria-current="page"' : "";
+        if (!e.hijos) return '<li><a href="' + e.url + '"' + actual + ">" + e.texto + "</a></li>";
+        return (
+          '<li class="nav-con-sub"><a href="' + e.url + '"' + actual + ">" + e.texto + ' <span class="nav-caret" aria-hidden="true">▾</span></a>' +
+          '<ul class="nav-sub">' +
+          e.hijos.map(function (h) {
+            var extra = h.externo ? ' target="_blank" rel="noopener"' : "";
+            return '<li><a href="' + h.url + '"' + extra + ">" + h.texto + "</a></li>";
+          }).join("") +
+          "</ul></li>"
+        );
       }).join("") +
       '<li class="nav-cta-movil"><a href="inscripciones.html">Inscripciones ' + esc(C.ciclo || "") + "</a></li>" +
       "</ul>" +
