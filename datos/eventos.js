@@ -52,7 +52,7 @@ window.EVENTOS = [
     titulo: "Fechas que nos importan",
     descripcion: "Mirar de frente lo que a otros les duele también es educación. El 25N y el 8M aquí se conversan, se pintan y se toman en serio.",
     fotos: [
-      { src: "img/ev-25n-marco.webp", alt: "El director y tres estudiantes con el marco morado del 25 de noviembre contra la violencia hacia las mujeres", pie: "25N: nos tomamos la foto y la palabra" },
+      { src: "img/ev-25n-marco.webp", alt: "Integrantes de la comunidad del plantel con el marco morado del 25 de noviembre contra la violencia hacia las mujeres", pie: "25N: nos tomamos la foto y la palabra" },
       { src: "img/ev-8m-huellas.webp", alt: "Alumnas estampando sus huellas con pintura sobre cartulina morada por el 8 de marzo", pie: "Huellas del 8 de marzo" },
       { src: "img/ev-25n-lienzo.webp", alt: "Lienzo con una huella de mano morada y la leyenda No más violencia contra las mujeres", pie: "El mensaje, claro" },
     ],
@@ -71,7 +71,7 @@ window.EVENTOS = [
     descripcion: "Hay aprendizajes que valen más que una calificación: saber cuidar una vida, empezando por la propia.",
     fotos: [
       { src: "img/ev-rcp.webp", alt: "Práctica de reanimación con maniquíes durante el curso de primeros auxilios", pie: "Primeros auxilios: práctica real" },
-      { src: "img/ev-yodecido.webp", alt: "Instructor del taller Yo Decido exponiendo frente al grupo en un aula iluminada", pie: "Taller «¡Yo Decido!»" },
+      { src: "img/ev-yodecido.webp", alt: "El taller Yo Decido en el aula, con el grupo atento a la exposición", pie: "Taller «¡Yo Decido!»" },
     ],
   },
   {
