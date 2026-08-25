@@ -9,7 +9,7 @@ window.EVENTOS = [
   {
     id: "deportes",
     titulo: "La cancha habla",
-    descripcion: "Voleibol bajo la techumbre: el deporte también es materia de todos los días. Aquí nadie se queda en la banca.",
+    descripcion: "El deporte enseña lo que ningún pizarrón: que el punto se gana en equipo y que levantarse es parte del juego.",
     fotos: [
       { src: "img/ev-voleibol-2.webp", alt: "Partido de voleibol con el balón sobre la red en la cancha techada del plantel", pie: "El balón en el aire y el punto en disputa" },
       { src: "img/ev-voleibol-1.webp", alt: "Estudiante saltando a rematar durante un partido de voleibol en la cancha techada", pie: "El remate, con todo" },
@@ -18,7 +18,7 @@ window.EVENTOS = [
   {
     id: "convivios",
     titulo: "Sabor de casa",
-    descripcion: "Cazuelas de barro, rosca de reyes y cocina entre compañeros: los convivios donde la escuela se vuelve familia.",
+    descripcion: "Compartir la mesa también forma: quien aprende a servir a los demás, aprendió la primera lección de comunidad.",
     fotos: [
       { src: "img/ev-cazuelas.webp", alt: "Cazuelas de barro con guisados y salsas servidas sobre un mantel azul durante un convivio escolar", pie: "Las cazuelas del convivio" },
       { src: "img/ev-rosca.webp", alt: "Estudiantes partiendo la rosca de reyes", pie: "La primera rosca de reyes" },
@@ -29,7 +29,7 @@ window.EVENTOS = [
   {
     id: "tradiciones",
     titulo: "Nuestro primer Día de Muertos",
-    descripcion: "El altar se montó a mano, con cempasúchil, papel picado y catrinas hechas en casa. Las tradiciones no se memorizan: se viven.",
+    descripcion: "El altar se montó a mano, con cempasúchil, papel picado y catrinas hechas en casa. Las tradiciones no se heredan solas: se trabajan, y al trabajarlas se vuelven propias.",
     fotos: [
       { src: "img/ev-altar-grupo.webp", alt: "Grupo de estudiantes sonriendo frente al altar de Día de Muertos del plantel", pie: "La generación y su altar" },
       { src: "img/ev-catrina.webp", alt: "Catrina artesanal con vestido negro rodeada de papel picado y velas en el altar", pie: "Detalle de catrina, hecha a mano" },
@@ -39,7 +39,7 @@ window.EVENTOS = [
   {
     id: "cultura-paz",
     titulo: "Cultura de paz",
-    descripcion: "Del círculo en el patio al mural de Entornos Seguros: la convivencia se construye, se pinta y se practica.",
+    descripcion: "La paz no se decreta: se construye. A veces con un círculo en el patio, a veces con un pincel en la pared.",
     fotos: [
       { src: "img/ev-circulo.webp", alt: "Círculo de estudiantes en el patio del plantel visto desde el aire con luz de atardecer", pie: "El círculo de paz, desde el aire" },
       { src: "img/ev-mural.webp", alt: "Mural colorido de Entornos Seguros con mensajes de paz, respeto, igualdad e inclusión", pie: "El mural terminado" },
@@ -50,7 +50,7 @@ window.EVENTOS = [
   {
     id: "conciencia",
     titulo: "Fechas que nos importan",
-    descripcion: "El 25N y el 8M no pasan de largo por esta escuela: se pintan, se conversan y se toman en serio.",
+    descripcion: "Mirar de frente lo que a otros les duele también es educación. El 25N y el 8M aquí se conversan, se pintan y se toman en serio.",
     fotos: [
       { src: "img/ev-25n-marco.webp", alt: "El director y tres estudiantes con el marco morado del 25 de noviembre contra la violencia hacia las mujeres", pie: "25N: nos tomamos la foto y la palabra" },
       { src: "img/ev-8m-huellas.webp", alt: "Alumnas estampando sus huellas con pintura sobre cartulina morada por el 8 de marzo", pie: "Huellas del 8 de marzo" },
@@ -60,7 +60,7 @@ window.EVENTOS = [
   {
     id: "empatia",
     titulo: "Bastón Blanco",
-    descripcion: "Con los ojos vendados y un bastón por guía, aprendimos lo que no se aprende en el pizarrón: ponernos en el lugar del otro.",
+    descripcion: "Con los ojos vendados y un bastón por guía, aprendimos la lección más difícil del programa: ponernos en el lugar del otro.",
     fotos: [
       { src: "img/ev-baston-guia.webp", alt: "Estudiante con los ojos vendados avanza con bastón blanco mientras una compañera le tiende la mano", pie: "Una mano que guía" },
     ],
@@ -68,7 +68,7 @@ window.EVENTOS = [
   {
     id: "talleres",
     titulo: "Talleres y brigadas",
-    descripcion: "Primeros auxilios, prevención y decisiones informadas: lo que se aprende aquí también salva y cuida.",
+    descripcion: "Hay aprendizajes que valen más que una calificación: saber cuidar una vida, empezando por la propia.",
     fotos: [
       { src: "img/ev-rcp.webp", alt: "Práctica de reanimación con maniquíes durante el curso de primeros auxilios", pie: "Primeros auxilios: práctica real" },
       { src: "img/ev-yodecido.webp", alt: "Instructor del taller Yo Decido exponiendo frente al grupo en un aula iluminada", pie: "Taller «¡Yo Decido!»" },
@@ -77,7 +77,7 @@ window.EVENTOS = [
   {
     id: "salidas",
     titulo: "Salidas educativas",
-    descripcion: "El aula también está allá afuera: visitas a empresas de la región para ver cómo funciona el mundo del trabajo.",
+    descripcion: "El aula también está allá afuera: conocer de cerca el mundo del trabajo es el primer paso para elegir el propio.",
     fotos: [
       { src: "img/ev-bimbo.webp", alt: "Seis estudiantes sonrientes durante la visita educativa a la planta de Bimbo", pie: "Visita a Bimbo" },
     ],
@@ -85,7 +85,7 @@ window.EVENTOS = [
   {
     id: "navidad",
     titulo: "Dibujemos la Navidad",
-    descripcion: "Cientos de figuras coloreadas por toda la comunidad se volvieron un solo tapiz. Diciembre también se estrena.",
+    descripcion: "Cientos de manos, un solo tapiz: nadie construye nada grande solo.",
     fotos: [
       { src: "img/ev-navidad-mural.webp", alt: "Mural navideño hecho con cientos de dibujos coloreados por la comunidad escolar", pie: "El tapiz completo" },
       { src: "img/ev-navidad-manos.webp", alt: "Manos de estudiantes coloreando figuras navideñas con plumones", pie: "Plumón por plumón" },
