@@ -9,10 +9,13 @@
 //
 // Regla de la casa: al pasar la contingencia, regresar estado a "normal".
 // Una franja vieja mata la credibilidad del canal.
+//
+// actualizado: escribirlo como se lee, ej. "24 de agosto de 2026, 20:00"
+// (el sitio añade la "h" al pintarlo).
 // ============================================================
 window.ESTATUS = {
   estado: "normal",
   titulo: "Clases con normalidad",
   mensaje: "",
-  actualizado: "2026-08-24 20:00",
+  actualizado: "24 de agosto de 2026, 20:00",
 };

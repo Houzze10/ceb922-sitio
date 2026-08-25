@@ -62,7 +62,7 @@ window.EVENTOS = [
     titulo: "Bastón Blanco",
     descripcion: "Con los ojos vendados y un bastón por guía, aprendimos la lección más difícil del programa: ponernos en el lugar del otro.",
     fotos: [
-      { src: "img/ev-baston-guia.webp", alt: "Estudiante con los ojos vendados avanza con bastón blanco mientras una compañera le tiende la mano", pie: "Una mano que guía" },
+      { src: "img/vida-baston-blanco.webp", alt: "Estudiante con los ojos vendados avanza con bastón blanco mientras una compañera le tiende la mano", pie: "Una mano que guía" },
     ],
   },
   {
@@ -71,7 +71,7 @@ window.EVENTOS = [
     descripcion: "Hay aprendizajes que valen más que una calificación: saber cuidar una vida, empezando por la propia.",
     fotos: [
       { src: "img/ev-rcp.webp", alt: "Práctica de reanimación con maniquíes durante el curso de primeros auxilios", pie: "Primeros auxilios: práctica real" },
-      { src: "img/ev-yodecido.webp", alt: "El taller Yo Decido en el aula, con el grupo atento a la exposición", pie: "Taller «¡Yo Decido!»" },
+      { src: "img/ev-yodecido.webp", alt: "El taller ¡Yo Decido! en el aula, con el grupo atento a la exposición", pie: "Taller «¡Yo Decido!»" },
     ],
   },
   {

@@ -1,7 +1,7 @@
 // ============================================================
 // CALENDARIO DE ACTIVIDADES DEL CEB 9/22
 // Cada entrada es una tarjeta en la sección "Calendario de
-// actividades" (comunidad.html). Se muestran en el orden del
+// actividades" (calendario.html). Se muestran en el orden del
 // arreglo. Al pasar una fecha, la tarjeta se retira sola si
 // tiene "vence" (AAAA-MM-DD).
 //
@@ -18,7 +18,7 @@ window.CALENDARIO = [
   {
     evento: "Curso propedéutico EDIEMS · Grupos 101 y 102",
     fecha: "Inicia el lunes 24 de agosto",
-    detalle: "Jornada de 14:00 a 18:00 h. El horario completo está en la sección de arriba.",
-    vence: "2026-09-05",
+    detalle: "Jornada de 14:00 a 18:00 h. Consulta el horario completo en Estudiantes y familias → Horarios de grupo.",
+    vence: "2026-08-28",
   },
 ];

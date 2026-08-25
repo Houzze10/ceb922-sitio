@@ -95,7 +95,7 @@
         ],
       },
       { url: "vida.html", texto: "Vida estudiantil", id: "vida" },
-      { url: "avisos.html", texto: "Avisos", id: "avisos" },
+      { url: "avisos.html", texto: "Avisos y comunicados", id: "avisos" },
       { url: "contacto.html", texto: "Contacto", id: "contacto" },
     ];
 
@@ -143,7 +143,7 @@
         var actual = activo ? ' aria-current="page"' : "";
         if (!e.hijos) return '<li><a href="' + e.url + '"' + actual + ">" + e.texto + "</a></li>";
         return (
-          '<li class="nav-con-sub"><a href="' + e.url + '"' + actual + ">" + e.texto + ' <span class="nav-caret" aria-hidden="true">▾</span></a>' +
+          '<li class="nav-con-sub"><a href="' + e.url + '"' + actual + ' aria-haspopup="true" aria-expanded="false">' + e.texto + ' <span class="nav-caret" aria-hidden="true">▾</span></a>' +
           '<ul class="nav-sub">' +
           e.hijos.map(function (h) {
             var extra = h.externo ? ' target="_blank" rel="noopener"' : "";
@@ -168,6 +168,25 @@
         boton.setAttribute("aria-label", abierto ? "Cerrar menú" : "Abrir menú");
       });
     }
+
+    /* Estado accesible de los submenús: aria-expanded + cierre con Escape */
+    sitio.querySelectorAll(".nav-con-sub").forEach(function (li) {
+      var padre = li.querySelector("a");
+      function marcar(abierto) { padre.setAttribute("aria-expanded", abierto ? "true" : "false"); }
+      li.addEventListener("mouseenter", function () { marcar(true); });
+      li.addEventListener("mouseleave", function () { marcar(false); });
+      li.addEventListener("focusin", function () { marcar(true); });
+      li.addEventListener("focusout", function () { marcar(false); });
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key !== "Escape") return;
+      var activo = document.activeElement;
+      var sub = activo && activo.closest ? activo.closest(".nav-con-sub") : null;
+      if (sub) {
+        activo.blur();
+        sub.querySelector("a").setAttribute("aria-expanded", "false");
+      }
+    });
   }
 
   /* ---------- Pie de página ---------- */
@@ -220,7 +239,7 @@
 
   /* ---------- Tarjeta de aviso ---------- */
   function tarjetaAviso(a) {
-    var cat = CATS[a.tipo] || { nombre: a.tipo || "Aviso", color: "var(--guinda-700)" };
+    var cat = CATS[a.tipo] || { nombre: a.tipo || "Aviso", color: "var(--azul-800)" };
     return (
       '<article class="aviso-tarjeta" style="--cat-color:' + cat.color + '">' +
       '<div class="aviso-meta">' +
@@ -320,7 +339,7 @@
     }
 
     document.title = aviso.titulo + " · " + (C.nombreCorto || "CEB 9/22");
-    var cat = CATS[aviso.tipo] || { nombre: aviso.tipo || "Aviso", color: "var(--guinda-700)" };
+    var cat = CATS[aviso.tipo] || { nombre: aviso.tipo || "Aviso", color: "var(--azul-800)" };
     var urlCompartir = location.href;
     var textoWa = encodeURIComponent(aviso.titulo + " — " + (C.nombreCorto || "CEB 9/22") + "\n" + urlCompartir);
 
@@ -449,7 +468,10 @@
     var visorCerrar = document.getElementById("visor-cerrar");
     if (!visor || !visorImg) return;
 
+    var origen = null;
+
     function abrir(fig) {
+      origen = fig;
       visorImg.src = fig.getAttribute("data-src");
       visorImg.alt = fig.querySelector("img") ? fig.querySelector("img").alt : "";
       visorPie.textContent = fig.getAttribute("data-pie") || "";
@@ -461,7 +483,12 @@
       visor.hidden = true;
       visorImg.src = "";
       document.body.style.overflow = "";
+      if (origen) origen.focus();
     }
+    visor.addEventListener("keydown", function (e) {
+      /* único elemento enfocable dentro del visor: el foco no sale al fondo */
+      if (e.key === "Tab") { e.preventDefault(); visorCerrar.focus(); }
+    });
     caja.querySelectorAll("figure").forEach(function (fig) {
       fig.addEventListener("click", function () { abrir(fig); });
       fig.addEventListener("keydown", function (e) {
@@ -478,26 +505,28 @@
     var tabs = document.getElementById(idTabs);
     var caja = document.getElementById(idTabla);
     if (!tabs || !caja || !datos) return;
+    caja.setAttribute("role", "tabpanel");
+    caja.setAttribute("tabindex", "0");
     var DIAS = datos.dias || ["Hora", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes"];
 
     /* Paleta fija por materia: cada una con su color, bien distinto del resto */
     var COLORES_MATERIA = [
       { busca: "NATURALES",      fondo: "#e3f5e1", borde: "#2e8b3d", texto: "#14501f" },
-      { busca: "MATEMÁTICO",     fondo: "#e1ecfb", borde: "#2563c4", texto: "#123c78" },
+      { busca: "MATEMÁT",        fondo: "#e1ecfb", borde: "#2563c4", texto: "#123c78" },
       { busca: "LENGUA",         fondo: "#ffedd9", borde: "#d97416", texto: "#7a3d05" },
       { busca: "INGLÉS",         fondo: "#efe4fb", borde: "#7c3aed", texto: "#44207e" },
       { busca: "DIGITAL",        fondo: "#d9f4f7", borde: "#0e94a8", texto: "#075e6b" },
       { busca: "SOCIALES",       fondo: "#fdf3cd", borde: "#c29b06", texto: "#6d5503" },
       { busca: "FILOSÓFICO",     fondo: "#fbe3ef", borde: "#c92578", texto: "#711342" },
       { busca: "BIOÉTICA",       fondo: "#f4e0f6", borde: "#9c34ad", texto: "#571b61" },
-      { busca: "CIUDADANA",      fondo: "#eff7d8", borde: "#7ba311", texto: "#40560a" },
+      { busca: "CIUDADANA",      fondo: "#eaf6b7", borde: "#7ba311", texto: "#40560a" },
       { busca: "FÍSICAS",        fondo: "#fde5e0", borde: "#d9482f", texto: "#7c2114" },
-      { busca: "TURISMO",        fondo: "#dcf3ec", borde: "#0d9373", texto: "#06523f" },
+      { busca: "TURISMO",        fondo: "#cdeef4", borde: "#0d9373", texto: "#06523f" },
       { busca: "HOSPEDAJE",      fondo: "#f3e9df", borde: "#96622d", texto: "#57351a" },
-      { busca: "SOCIOEMOCIONAL", fondo: "#f5edd2", borde: "#a08415", texto: "#5c4a08" },
-      { busca: "TEST",           fondo: "#fbe7cd", borde: "#c47612", texto: "#6d4006" },
-      { busca: "INTEGRACIÓN",    fondo: "#fdf7d5", borde: "#b0a013", texto: "#5f5607" },
-      { busca: "CRÍTICO",        fondo: "#fdeade", borde: "#c26a3a", texto: "#6e3517" },
+      { busca: "SOCIOEMOCIONAL", fondo: "#f9f0b8", borde: "#a08415", texto: "#5c4a08" },
+      { busca: "TEST",           fondo: "#d9f4f7", borde: "#0e94a8", texto: "#075e6b" },
+      { busca: "INTEGRACIÓN",    fondo: "#efe4fb", borde: "#7c3aed", texto: "#44207e" },
+      { busca: "CRÍTICO",        fondo: "#fbe3ef", borde: "#c92578", texto: "#711342" },
     ];
 
     function colorMateria(nombre) {
@@ -510,7 +539,7 @@
 
     function pintarGrupo(g) {
       var html = '<div class="tabla-scroll"><table class="horario"><caption class="sr-only">Horario del grupo ' + esc(g.grupo) + "</caption><thead><tr>";
-      DIAS.forEach(function (d) { html += "<th>" + d + "</th>"; });
+      DIAS.forEach(function (d) { html += '<th scope="col">' + esc(d) + "</th>"; });
       html += "</tr></thead><tbody>";
       g.filas.forEach(function (fila) {
         html += '<tr><th scope="row">' + esc(fila[0]) + "</th>";
@@ -519,7 +548,7 @@
           if (m === "RECESO") {
             html += '<td class="celda-receso">Receso</td>';
           } else if (!m) {
-            html += '<td class="celda-libre">—</td>';
+            html += '<td class="celda-libre">—<span class="sr-only"> Sin clase</span></td>';
           } else {
             var c = colorMateria(m);
             html += '<td class="celda-materia" style="background:' + c.fondo + ";border-left:4px solid " + c.borde + ";color:" + c.texto + '">' + esc(m) + "</td>";
@@ -537,13 +566,29 @@
       b.type = "button";
       b.className = "horario-tab" + (i === 0 ? " activo" : "");
       b.setAttribute("role", "tab");
+      b.setAttribute("aria-selected", i === 0 ? "true" : "false");
+      b.setAttribute("aria-controls", idTabla);
       b.textContent = "Grupo " + g.grupo;
       b.addEventListener("click", function () {
-        tabs.querySelectorAll(".horario-tab").forEach(function (x) { x.classList.remove("activo"); });
+        tabs.querySelectorAll(".horario-tab").forEach(function (x) {
+          x.classList.remove("activo");
+          x.setAttribute("aria-selected", "false");
+        });
         b.classList.add("activo");
+        b.setAttribute("aria-selected", "true");
         pintarGrupo(g);
       });
       tabs.appendChild(b);
+    });
+    tabs.addEventListener("keydown", function (e) {
+      if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
+      var lista = Array.prototype.slice.call(tabs.querySelectorAll(".horario-tab"));
+      var i = lista.indexOf(document.activeElement);
+      if (i === -1) return;
+      e.preventDefault();
+      var j = e.key === "ArrowRight" ? (i + 1) % lista.length : (i - 1 + lista.length) % lista.length;
+      lista[j].focus();
+      lista[j].click();
     });
     pintarGrupo(datos.grupos[0]);
   }
@@ -553,7 +598,7 @@
     montarHorario("prope-tabs", "prope-tabla", window.PROPEDEUTICO);
   }
 
-  /* ---------- Calendario de actividades (comunidad.html) ---------- */
+  /* ---------- Calendario de actividades (calendario.html) ---------- */
   function pintarCalendario() {
     var caja = document.getElementById("calendario-lista");
     if (!caja || !window.CALENDARIO) return;

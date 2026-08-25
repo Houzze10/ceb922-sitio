@@ -33,13 +33,12 @@ En ~1 minuto el cambio está en vivo. Los avisos con campo `vence` caducan solos
 - `avisos.html` — lista de avisos con filtros · `aviso.html?id=...` — aviso individual (URL compartible)
 - `estatus.html` — "¿Hay clases hoy?"
 - `privacidad.html` — aviso de privacidad
-- `css/estilos.css` — sistema de diseño (guinda SEP + oro, escala 8px)
+- `css/estilos.css` — sistema de diseño (azul marino + turquesa, escala 8px)
 - `js/app.js` — encabezado/pie compartidos y renderizado de avisos
-- `docs/` — PDFs adjuntos de avisos (convocatorias, calendarios)
 - `img/` — fotografías del plantel
 
 ## Reglas de la casa
 
 - **Jamás** subir datos personales (listas de alumnos, CURPs, calificaciones, teléfonos de padres): el repositorio es público y git no olvida.
-- PDFs < 5 MB, fotos comprimidas (< 300 KB).
+- **Nada de PDFs ni redirecciones**: la información vive dentro de las páginas como contenido. Fotos comprimidas (< 300 KB).
 - Al pasar una contingencia, regresar `estatus.js` a `estado: "normal"`.

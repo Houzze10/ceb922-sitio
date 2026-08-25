@@ -100,6 +100,7 @@ h1, h2, h3 { font-family: var(--f-display); line-height: 1.12; color: var(--azul
 h1 { font-size: clamp(2.4rem, 6vw, 4rem); letter-spacing: -0.015em; }
 h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); letter-spacing: -0.01em; }
 h3 { font-size: 1.28rem; font-weight: 600; }
+.h3-grande { font-size: 1.4rem; }
 h1 em, h2 em { font-style: italic; font-weight: inherit; color: var(--turquesa-700); }
 p { margin: 0 0 var(--e2); max-width: 70ch; }
 ul, ol { padding-left: 1.3em; }
@@ -108,6 +109,7 @@ li { margin-bottom: 6px; }
 .contenedor { max-width: 1180px; margin-inline: auto; padding-inline: var(--e3); }
 .seccion { padding-block: var(--e12); }
 .seccion--apretada { padding-block: var(--e8); }
+.seccion--asomo { padding-block: var(--e4) var(--e8); }
 .seccion--blanca { background: var(--blanco); }
 .centrado { text-align: center; }
 
@@ -247,6 +249,9 @@ html.js .rev.visto { opacity: 1; transform: none; }
     flex-direction: column; align-items: stretch; gap: 0;
     padding: var(--e1) var(--e3) var(--e3);
     box-shadow: 0 18px 28px rgba(13, 19, 48, 0.14);
+    /* el menú vive anclado a la barra sticky: necesita su propio scroll */
+    max-height: calc(100dvh - 80px);
+    overflow-y: auto;
   }
   .nav-enlaces.abierto { display: flex; }
   .nav-enlaces a { padding: 14px 16px; border-radius: 12px; font-size: 1.05rem; }
@@ -351,7 +356,14 @@ html.js .rev.visto { opacity: 1; transform: none; }
     background: rgba(13, 19, 48, 0.8); border: 1px solid rgba(143, 216, 228, 0.45);
     color: #eaf4f7; font-size: 0.88rem; font-weight: 600; white-space: nowrap;
   }
-  .foto-flotante:hover, .foto-flotante:focus-visible { animation-play-state: paused; z-index: 6; }
+  .foto-flotante:hover { animation-play-state: paused; z-index: 6; }
+  /* con foco de teclado la foto sale de la hélice: siempre visible (WCAG 2.4.7) */
+  .foto-flotante:focus-visible {
+    animation-play-state: paused;
+    opacity: 1 !important;
+    transform: translate(0, -220px) scale(1) !important;
+    z-index: 6 !important;
+  }
   .foto-flotante:hover img, .foto-flotante:focus-visible img { transform: scale(1.16); border-color: #fff; }
 
   .ff-1 { animation-delay: 0s; }
@@ -832,7 +844,7 @@ table.horario tbody tr + tr { border-top: 1px solid var(--linea); }
   background: repeating-linear-gradient(-45deg, #eef2f7, #eef2f7 8px, #e3e9f1 8px, #e3e9f1 16px);
   color: var(--tinta-suave); text-align: center; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; font-size: 0.72rem;
 }
-.celda-libre { color: #b6c1d2; text-align: center; }
+.celda-libre { color: var(--tinta-suave); text-align: center; }
 .horario-pie { display: flex; justify-content: space-between; align-items: center; gap: var(--e2); flex-wrap: wrap; margin-top: var(--e2); }
 
 /* ---------- Calendario de actividades ---------- */

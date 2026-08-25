@@ -7,7 +7,7 @@
 // ============================================================
 /* Curso propedéutico EDIEMS para nuevo ingreso (grupos 101 y 102) */
 window.PROPEDEUTICO = {
-  ciclo: "24 al 28 de agosto · 14:00 a 18:00 · jornada continua",
+  ciclo: "24 al 28 de agosto · 14:00 a 18:00 h · jornada continua",
   dias: ["Hora", "Lunes 24 · Test", "Martes 25 · Integración", "Miércoles 26", "Jueves 27", "Viernes 28"],
   grupos: [
     {
