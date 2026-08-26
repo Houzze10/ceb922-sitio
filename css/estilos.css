@@ -642,6 +642,8 @@ html.js .rev.visto { opacity: 1; transform: none; }
   font-family: var(--f-display); font-size: 4rem; line-height: 1; color: var(--turquesa);
 }
 .cita p { font-size: 1.08rem; }
+.cita .cita-frase { font-family: var(--f-display); font-size: 1.3rem; font-weight: 600; color: var(--azul-800); }
+.cita .cita-nota { font-size: 0.95rem; color: var(--tinta-suave); margin-bottom: 0; }
 .cita .cita-firma { color: var(--tinta-suave); font-style: italic; margin-bottom: 0; }
 
 /* ---------- Avisos ---------- */
