@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vacantes de empleo · CEB 9/22 Mazatlán</title>
+  <meta name="description" content="Vacantes de empleo del CEB 9/22 de Mazatlán: puestos abiertos, perfiles requeridos y documentación para postular ante la Dirección del plantel.">
+  <link rel="icon" type="image/png" href="favicon.png?v=30">
+  <link rel="stylesheet" href="css/estilos.css?v=30">
+</head>
+<body data-pagina="vacantes">
+  <div id="encabezado"></div>
+
+  <main id="contenido">
+    <section class="hero hero--interior">
+      <div class="contenedor">
+        <span class="kicker kicker--claro">Trabaja con nosotros</span>
+        <h1>Vacantes de empleo</h1>
+        <p class="hero-sub">Los puestos abiertos del plantel se publican en esta página, con su perfil y su vigencia.</p>
+      </div>
+      <svg class="ola" viewBox="0 0 1440 64" preserveAspectRatio="none" aria-hidden="true"><path class="ola-tras" d="M0,22 C240,58 480,-6 720,10 C960,26 1200,54 1440,16 L1440,64 L0,64 Z"/><path class="ola-frente" d="M0,38 C240,70 480,6 720,22 C960,38 1200,62 1440,30 L1440,64 L0,64 Z"/></svg>
+    </section>
+
+    <section class="seccion seccion--apretada">
+      <div class="contenedor">
+        <h2 class="sr-only">Vacantes abiertas</h2>
+        <div class="calendario-rejilla" id="vacantes-lista"></div>
+      </div>
+    </section>
+
+    <section class="seccion seccion--apretada seccion--blanca">
+      <div class="contenedor">
+        <span class="kicker">Postulaciones</span>
+        <h2>Cómo postular</h2>
+        <p>Las postulaciones se reciben únicamente en el correo de la Dirección: <a href="mailto:direccion922@dgb.edu.mx">direccion922@dgb.edu.mx</a>. Indica en el asunto el puesto al que postulas.</p>
+        <div id="vacantes-docs-bloque" hidden>
+          <h3 class="mt-4">Documentos requeridos</h3>
+          <p>Envía al correo de la Dirección los siguientes documentos:</p>
+          <ul class="lista-check" id="vacantes-docs"></ul>
+        </div>
+        <div class="nota mt-4">
+          <p>Solo se da seguimiento a las postulaciones de vacantes vigentes que lleguen completas al correo indicado. Para dudas, acude a la Dirección de lunes a viernes, de 14:00 a 20:00 h.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="pie"></div>
+
+  <script src="datos/config.js?v=30"></script>
+  <script src="datos/estatus.js?v=30"></script>
+  <script src="datos/avisos.js?v=30"></script>
+  <script src="datos/vacantes.js?v=30"></script>
+  <script src="js/app.js?v=30"></script>
+</body>
+</html>

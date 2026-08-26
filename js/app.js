@@ -95,12 +95,19 @@
         ],
       },
       { url: "vida.html", texto: "Vida estudiantil", id: "vida" },
-      { url: "avisos.html", texto: "Avisos y comunicados", id: "avisos" },
+      {
+        url: "avisos.html", texto: "Avisos y comunicados", id: "avisos",
+        hijos: [
+          { url: "avisos.html", texto: "Avisos y comunicados" },
+          { url: "convocatorias.html", texto: "Convocatorias" },
+          { url: "vacantes.html", texto: "Vacantes de empleo" },
+        ],
+      },
       { url: "contacto.html", texto: "Contacto", id: "contacto" },
     ];
 
     /* páginas hijas que iluminan a su padre en el menú */
-    var PADRES = { oferta: "inscripciones", conocenos: "inscripciones", estatus: "comunidad", asistencia: "comunidad" };
+    var PADRES = { oferta: "inscripciones", conocenos: "inscripciones", estatus: "comunidad", asistencia: "comunidad", convocatorias: "avisos", vacantes: "avisos" };
 
     var franja = "";
     if (ESTATUS.estado === "aviso" || ESTATUS.estado === "emergencia") {
@@ -223,6 +230,8 @@
       '<li><a href="asistencia.html">Pase de asistencia</a></li>' +
       '<li><a href="estatus.html">¿Hay clases hoy?</a></li>' +
       '<li><a href="avisos.html">Avisos y comunicados</a></li>' +
+      '<li><a href="convocatorias.html">Convocatorias</a></li>' +
+      '<li><a href="vacantes.html">Vacantes de empleo</a></li>' +
       "</ul></div>" +
       "<div><h2>Contacto</h2><ul>" + contacto +
       (C.facebook ? '<li><a href="' + esc(C.facebook) + '" target="_blank" rel="noopener">Facebook ↗</a></li>' : "") +
@@ -619,6 +628,55 @@
     }).join("");
   }
 
+  /* ---------- Convocatorias (convocatorias.html) ---------- */
+  function pintarConvocatorias() {
+    var caja = document.getElementById("convocatorias-lista");
+    if (!caja) return;
+    var hoy = hoyISO();
+    var lista = (window.CONVOCATORIAS || []).filter(function (c) {
+      return c && c.titulo && (!c.vence || !FECHA_ISO.test(c.vence) || c.vence >= hoy);
+    });
+    if (!lista.length) {
+      caja.innerHTML = '<p class="sin-resultados">Por el momento no hay convocatorias abiertas. Cuando la Dirección publique una, aparecerá en esta página.</p>';
+      return;
+    }
+    caja.innerHTML = lista.map(function (c) {
+      return '<div class="fecha-tarjeta">' +
+        "<strong>" + esc(c.titulo) + "</strong>" +
+        (c.fecha ? '<span class="fecha-cuando">' + esc(c.fecha) + "</span>" : "") +
+        (c.detalle ? "<p>" + esc(c.detalle) + "</p>" : "") +
+        "</div>";
+    }).join("");
+  }
+
+  /* ---------- Vacantes de empleo (vacantes.html) ---------- */
+  function pintarVacantes() {
+    var caja = document.getElementById("vacantes-lista");
+    if (caja) {
+      var hoy = hoyISO();
+      var lista = (window.VACANTES || []).filter(function (v) {
+        return v && v.puesto && (!v.vence || !FECHA_ISO.test(v.vence) || v.vence >= hoy);
+      });
+      if (!lista.length) {
+        caja.innerHTML = '<p class="sin-resultados">Por el momento no hay vacantes abiertas. Cuando la Dirección publique una, aparecerá en esta página.</p>';
+      } else {
+        caja.innerHTML = lista.map(function (v) {
+          return '<div class="fecha-tarjeta">' +
+            "<strong>" + esc(v.puesto) + "</strong>" +
+            (v.perfil ? '<span class="fecha-cuando">' + esc(v.perfil) + "</span>" : "") +
+            (v.detalle ? "<p>" + esc(v.detalle) + "</p>" : "") +
+            "</div>";
+        }).join("");
+      }
+    }
+    var docs = document.getElementById("vacantes-docs");
+    var bloque = document.getElementById("vacantes-docs-bloque");
+    if (docs && bloque && window.VACANTES_DOCS && window.VACANTES_DOCS.length) {
+      docs.innerHTML = window.VACANTES_DOCS.map(function (d) { return "<li>" + esc(d) + "</li>"; }).join("");
+      bloque.hidden = false;
+    }
+  }
+
   /* ---------- Animación de aparición al hacer scroll ---------- */
   function animarAparicion() {
     if (!("IntersectionObserver" in window)) return;
@@ -647,6 +705,8 @@
     try { pintarVida(); } catch (e) {}
     try { pintarHorarios(); } catch (e) {}
     try { pintarCalendario(); } catch (e) {}
+    try { pintarConvocatorias(); } catch (e) {}
+    try { pintarVacantes(); } catch (e) {}
     try { animarAparicion(); } catch (e) {}
   });
 })();
