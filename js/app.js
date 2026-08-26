@@ -89,7 +89,7 @@
         url: "comunidad.html", texto: "Estudiantes y familias", id: "comunidad",
         hijos: [
           { url: "comunidad.html#horarios", texto: "Horarios de grupo" },
-          { url: C.appAsistencia || "comunidad.html#asistencia", texto: "Pase de asistencia ↗", externo: !!C.appAsistencia },
+          { url: "asistencia.html", texto: "Pase de asistencia" },
           { url: "comunidad.html#tramites", texto: "Trámites" },
           { url: "estatus.html", texto: "¿Hay clases hoy?" },
         ],
@@ -100,7 +100,7 @@
     ];
 
     /* páginas hijas que iluminan a su padre en el menú */
-    var PADRES = { oferta: "inscripciones", conocenos: "inscripciones", estatus: "comunidad" };
+    var PADRES = { oferta: "inscripciones", conocenos: "inscripciones", estatus: "comunidad", asistencia: "comunidad" };
 
     var franja = "";
     if (ESTATUS.estado === "aviso" || ESTATUS.estado === "emergencia") {
@@ -126,7 +126,7 @@
       '<div class="barra-util"><div class="contenedor">' +
       '<nav class="util-enlaces" aria-label="Enlaces de acceso rápido">' +
       '<a href="estatus.html">¿Hay clases hoy?</a>' +
-      (C.appAsistencia ? '<a href="' + esc(C.appAsistencia) + '" target="_blank" rel="noopener" aria-label="Pase de asistencia (se abre en pestaña nueva)">Pase de asistencia ↗</a>' : "") +
+      '<a href="asistencia.html">Pase de asistencia</a>' +
       "</nav>" +
       "<div>" + utilDerecha + "</div>" +
       "</div></div>" +
@@ -220,7 +220,7 @@
       "<div><h2>Estudiantes y familias</h2><ul>" +
       '<li><a href="comunidad.html#horarios">Horarios de grupo</a></li>' +
       '<li><a href="calendario.html">Calendario de actividades</a></li>' +
-      (C.appAsistencia ? '<li><a href="' + esc(C.appAsistencia) + '" target="_blank" rel="noopener">Pase de asistencia ↗</a></li>' : "") +
+      '<li><a href="asistencia.html">Pase de asistencia</a></li>' +
       '<li><a href="estatus.html">¿Hay clases hoy?</a></li>' +
       '<li><a href="avisos.html">Avisos y comunicados</a></li>' +
       "</ul></div>" +
