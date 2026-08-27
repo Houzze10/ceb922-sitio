@@ -608,6 +608,16 @@
   }
 
   /* ---------- Calendario de actividades (calendario.html) ---------- */
+  /* Cada tipo de fecha con su color fijo, para encontrar lo tuyo sin leer todo */
+  var CATS_CAL = {
+    tramites:   { nombre: "Inscripciones",        color: "#2563c4", fondo: "#e8effb" },
+    ciclo:      { nombre: "Ciclo escolar",        color: "#2e8b3d", fondo: "#e9f6e7" },
+    evaluacion: { nombre: "Evaluaciones",         color: "#c47612", fondo: "#fdf0dc" },
+    suspension: { nombre: "Suspensión de clases", color: "#c02f2f", fondo: "#fbe5e5" },
+    vacaciones: { nombre: "Vacaciones",           color: "#7c3aed", fondo: "#f0e8fc" },
+    curso:      { nombre: "Cursos y jornadas",    color: "#0e94a8", fondo: "#e0f4f7" },
+  };
+
   function pintarCalendario() {
     var caja = document.getElementById("calendario-lista");
     if (!caja || !window.CALENDARIO) return;
@@ -619,8 +629,26 @@
       caja.innerHTML = '<p class="sin-resultados">Las próximas fechas del plantel se publicarán aquí.</p>';
       return;
     }
-    caja.innerHTML = lista.map(function (c, i) {
-      return '<div class="fecha-tarjeta">' +
+
+    /* Leyenda: solo las categorías presentes */
+    var leyenda = document.getElementById("calendario-leyenda");
+    if (leyenda) {
+      var presentes = [];
+      lista.forEach(function (c) {
+        if (c.tipo && CATS_CAL[c.tipo] && presentes.indexOf(c.tipo) === -1) presentes.push(c.tipo);
+      });
+      leyenda.innerHTML = presentes.map(function (t) {
+        var cat = CATS_CAL[t];
+        return '<span><i style="background:' + cat.color + '"></i>' + esc(cat.nombre) + "</span>";
+      }).join("");
+    }
+
+    caja.innerHTML = lista.map(function (c) {
+      var cat = c.tipo && CATS_CAL[c.tipo];
+      var estilo = cat ? ' style="border-left:5px solid ' + cat.color + '"' : "";
+      var chip = cat ? '<span class="cal-chip" style="background:' + cat.fondo + ";color:" + cat.color + '">' + esc(cat.nombre) + "</span>" : "";
+      return '<div class="fecha-tarjeta"' + estilo + ">" +
+        chip +
         "<strong>" + esc(c.evento) + "</strong>" +
         '<span class="fecha-cuando">' + esc(c.fecha) + "</span>" +
         (c.detalle ? "<p>" + esc(c.detalle) + "</p>" : "") +

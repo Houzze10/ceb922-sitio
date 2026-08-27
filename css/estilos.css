@@ -847,6 +847,16 @@ table.horario tbody tr + tr { border-top: 1px solid var(--linea); }
   color: var(--tinta-suave); text-align: center; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; font-size: 0.72rem;
 }
 .celda-libre { color: var(--tinta-suave); text-align: center; }
+
+/* Calendario: leyenda y categorías por color */
+.cal-leyenda { display: flex; flex-wrap: wrap; gap: 10px 18px; margin-bottom: var(--e3); }
+.cal-leyenda span { display: inline-flex; align-items: center; gap: 8px; font-size: 0.88rem; color: var(--tinta-suave); }
+.cal-leyenda i { width: 14px; height: 14px; border-radius: 4px; display: inline-block; }
+.fecha-tarjeta .cal-chip {
+  display: inline-block; align-self: flex-start;
+  font-size: 0.7rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
+  padding: 3px 10px; border-radius: 999px; margin-bottom: 8px;
+}
 .horario-pie { display: flex; justify-content: space-between; align-items: center; gap: var(--e2); flex-wrap: wrap; margin-top: var(--e2); }
 
 /* ---------- Calendario de actividades ---------- */
