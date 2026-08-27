@@ -134,7 +134,6 @@
       '<nav class="util-enlaces" aria-label="Enlaces de acceso rápido">' +
       '<a href="estatus.html">¿Hay clases hoy?</a>' +
       '<a href="asistencia.html">Pase de asistencia</a>' +
-      (C.appAsistencia ? '<a href="' + esc(C.appAsistencia) + '/docentes" target="_blank" rel="noopener" aria-label="Portal para docentes (se abre en pestaña nueva)">Portal docente ↗</a>' : "") +
       "</nav>" +
       "<div>" + utilDerecha + "</div>" +
       "</div></div>" +
@@ -237,7 +236,6 @@
       "<div><h2>Contacto</h2><ul>" + contacto +
       (C.facebook ? '<li><a href="' + esc(C.facebook) + '" target="_blank" rel="noopener">Facebook ↗</a></li>' : "") +
       (C.instagram ? '<li><a href="' + esc(C.instagram) + '" target="_blank" rel="noopener">Instagram ↗</a></li>' : "") +
-      (C.appAsistencia ? '<li><a href="' + esc(C.appAsistencia) + '/docentes" target="_blank" rel="noopener">Portal para docentes ↗</a></li>' : "") +
       '<li><a href="privacidad.html">Aviso de privacidad</a></li>' +
       "</ul></div>" +
       "</div>" +
